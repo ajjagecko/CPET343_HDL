@@ -9,14 +9,41 @@ use ieee.numeric_std.all;
 
 entity alu_xor is
    port(
-      a      :in std_logic;
-      b      :in std_logic;
-      x      :out std_logic;
+      a_i      :in std_logic;
+      b_i      :in std_logic;
+      x_o      :out std_logic;
    );
 end alu_xor;
 
 architecture structural of alu_xor is
 
-begin
+signal a_not_s    :std_logic;
+signal b_not_s    :std_logic;
+signal a_not_or_s :std_logic;
+signal b_not_or_s :std_logic;
 
+component or2 is
+   port(
+      a_i      :in std_logic;
+      b_i      :in std_logic;
+      x_o      :out std_logic;
+   );
+end component;
+
+component and3 is
+   port(
+      a_i      :in std_logic;
+      b_i      :in std_logic;
+      c_i      :in std_logic;
+      x_o      :out std_logic;
+   );
+end component;
+
+begin
+   a_not_s <= NOT a_i;
+   b_not_s <= NOT b_i;
+   
+   u0: and3 port map(a_not_s => a_i, b_i => b_i,  b_i => c_i, a_not_or_s => x_o);
+   u1: and3 port map(a_i => a_i, a_i => b_i,  b_not_s => c_i, b_not_or_s => x_o);
+   u2: or2 port map(a_not_or_s => a_i, b_not_or_s => b_i, x_o => x_o);
 end
