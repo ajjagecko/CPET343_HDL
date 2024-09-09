@@ -46,4 +46,4 @@ begin
    u0: and3 port map(a_i => a_not_s, b_i => b_i, c_i => b_i, x_o => a_not_or_s);
    u1: and3 port map(a_i => a_i, b_i => a_i, c_i => b_not_s, x_o => b_not_or_s);
    u2: or2 port map(a_i => a_not_or_s, b_i => b_not_or_s, x_o => x_o);
-end
+end architecture;

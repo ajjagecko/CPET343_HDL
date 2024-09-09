@@ -20,4 +20,4 @@ architecture structural of and3 is
 
 begin
    x_o <= a_i AND b_i AND c_i;
-end
+end architecture;

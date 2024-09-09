@@ -19,4 +19,4 @@ architecture structural of or2 is
 
 begin
    x_o <= a_i OR b_i;
-end
+end architecture;
