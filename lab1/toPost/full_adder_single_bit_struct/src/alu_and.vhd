@@ -1,12 +1,17 @@
 -------------------------------------------------------------------------------
--- Andrew Akre
--- Structural Implementation of Single Bit Adder with Carry Over
+-- Name: Andrew Akre
+-- Course: CPET 343
+-- Assignment: Lab 1
+-- Task:
+--    Structural Implementation of Single Bit Adder with Carry Over
+--    AND gate sub component
 -------------------------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;     
 use ieee.numeric_std.all; 
 
+-- Defining Inputs and Outputs for Structural
 entity and3 is
    port(
       a_i      :in std_logic;
