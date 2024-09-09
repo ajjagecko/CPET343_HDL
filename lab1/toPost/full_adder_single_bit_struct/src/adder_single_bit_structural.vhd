@@ -53,9 +53,9 @@ begin
    u0: or2 port map   (a_i => a_i, b_i => b_i, x_o => ab_or_s);
    u1: or2 port map   (a_i => a_i, b_i => cin_i, x_o => ac_or_s);
    u2: or2 port map   (a_i => b_i, b_i => cin_i, x_o => bc_or_s);
-   u3: and3 port map  (a_i => ab_or_s, b_i => ac_or_s, c_i = bc_or_s, x_o => cout_o);
+   u3: and3 port map  (a_i => ab_or_s, b_i => ac_or_s, c_i => bc_or_s, x_o => cout_o);
    u4: xor2 port map  (a_i => a_i, b_i => b_i, x_o => ab_xor_s);
-   u5: xor2 port map  (a_i => ab_xor_s, b_i => c_i, x_o => sum_o);
+   u5: xor2 port map  (a_i => ab_xor_s, b_i => cin_i, x_o => sum_o);
    
    
 end architecture;

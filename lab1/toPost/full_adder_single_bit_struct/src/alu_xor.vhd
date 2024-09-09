@@ -7,15 +7,15 @@ library ieee;
 use ieee.std_logic_1164.all;     
 use ieee.numeric_std.all; 
 
-entity alu_xor is
+entity xor2 is
    port(
       a_i      :in std_logic;
       b_i      :in std_logic;
       x_o      :out std_logic
    );
-end alu_xor;
+end xor2;
 
-architecture structural of alu_xor is
+architecture structural of xor2 is
 
 signal a_not_s    :std_logic;
 signal b_not_s    :std_logic;
