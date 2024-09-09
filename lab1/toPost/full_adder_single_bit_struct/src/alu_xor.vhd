@@ -11,7 +11,7 @@ entity alu_xor is
    port(
       a_i      :in std_logic;
       b_i      :in std_logic;
-      x_o      :out std_logic;
+      x_o      :out std_logic
    );
 end alu_xor;
 
@@ -26,7 +26,7 @@ component or2 is
    port(
       a_i      :in std_logic;
       b_i      :in std_logic;
-      x_o      :out std_logic;
+      x_o      :out std_logic
    );
 end component;
 
@@ -35,7 +35,7 @@ component and3 is
       a_i      :in std_logic;
       b_i      :in std_logic;
       c_i      :in std_logic;
-      x_o      :out std_logic;
+      x_o      :out std_logic
    );
 end component;
 
@@ -43,7 +43,7 @@ begin
    a_not_s <= NOT a_i;
    b_not_s <= NOT b_i;
    
-   u0: and3 port map(a_not_s => a_i, b_i => b_i,  b_i => c_i, a_not_or_s => x_o);
-   u1: and3 port map(a_i => a_i, a_i => b_i,  b_not_s => c_i, b_not_or_s => x_o);
-   u2: or2 port map(a_not_or_s => a_i, b_not_or_s => b_i, x_o => x_o);
+   u0: and3 port map(a_i => a_not_s, b_i => b_i, c_i => b_i, x_o => a_not_or_s);
+   u1: and3 port map(a_i => a_i, b_i => A_i, c_i => b_not_s, x_o => b_not_or_s);
+   u2: or2 port map(a_i => a_not_or_s, b_i => b_not_or_s, x_o => x_o);
 end

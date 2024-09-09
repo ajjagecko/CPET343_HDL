@@ -11,7 +11,7 @@ entity alu_or is
    port(
       a_i      :in std_logic;
       b_i      :in std_logic;
-      x_o      :out std_logic;
+      x_o      :out std_logic
    );
 end alu_or;
 

@@ -12,7 +12,7 @@ entity alu_and is
       a_i      :in std_logic;
       b_i      :in std_logic;
       c_i      :in std_logic;
-      x_o      :out std_logic;
+      x_o      :out std_logic
    );
 end alu_and;
 
