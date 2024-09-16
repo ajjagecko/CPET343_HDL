@@ -24,10 +24,10 @@ end adder_single_bit_s;
 architecture structural of adder_single_bit_s is
 
 -- Defining Internal Signals
-signal ab_or_s  :std_logic;
-signal ac_or_s  :std_logic;
-signal bc_or_s  :std_logic;
-signal ab_xor_s :std_logic;
+signal ab_or_s  :std_logic; --output of a or b
+signal ac_or_s  :std_logic; --output of a or c
+signal bc_or_s  :std_logic; --output of b or c
+signal ab_xor_s :std_logic; --output of a xor b
 
 -- Defining XOR Gate with 2 Input Signals
 component xor2 is
