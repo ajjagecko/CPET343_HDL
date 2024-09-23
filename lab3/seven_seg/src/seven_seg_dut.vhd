@@ -92,7 +92,7 @@ begin
       
    bcd: process(sum_reg_out_s)
       begin
-         case bcd_i is
+         case sum_reg_out_s is
             when "0000" => seven_seg_o <= "1000000";
             when "0001" => seven_seg_o <= "1111001";
             when "0010" => seven_seg_o <= "0100100";

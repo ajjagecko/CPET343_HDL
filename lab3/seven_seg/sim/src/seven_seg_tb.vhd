@@ -24,7 +24,7 @@ signal output       : std_logic;
 constant period     : time := 20ns;                                              
 signal clk          : std_logic := '0';
 signal reset        : std_logic := '1';
-signal bcd          : std_logic_vector(3 downto 0) := "0000";
+signal bcd          : std_logic_vector(3 downto 0) := "0001";
 
 begin
 
@@ -34,7 +34,7 @@ sequential_tb : process
       report "****************** sequential testbench start ****************";
       wait for 80 ns;   -- let all the initial conditions trickle through
       for i in 0 to 9 loop
-        bcd <= std_logic_vector(unsigned(bcd) + 1);
+        bcd <= std_logic_vector(unsigned(bcd)); --+ 1);
         wait for 40 ns;
       end loop;
       report "****************** sequential testbench stop ****************";
