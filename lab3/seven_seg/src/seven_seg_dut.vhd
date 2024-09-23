@@ -21,7 +21,7 @@ end seven_seg;
 
 architecture structural of seven_seg is
 
-component generic_adder_beh is 
+component generic_adder_arch is 
   generic (
     bits    : integer := 4
   );
@@ -46,12 +46,12 @@ component generic_counter is
 end component;
 
 constant bits_c : integer := 4;
-constant max_count_c : integer := 50000000;
+constant max_count_c : integer := 2;
 
 signal sum_reg_in_s   :std_logic_vector(bits_c-1 downto 0);
 signal sum_reg_out_s  :std_logic_vector(bits_c-1 downto 0) := "0000";
-signal c_s         :std_logic := '0';
-signal counter_out_s  :std_logic;
+signal c_s         : std_logic := '0';
+signal enable_s  :std_logic;
 
 begin
 
@@ -62,11 +62,11 @@ begin
       port map (
          clk => clk_Mhz_i, 
          reset => reset_i,
-         output => counter_out_s
+         output => enable_s
       );
       
       
-   dut1: generic_adder_beh
+   dut1: generic_adder_arch
       generic map (
          bits => bits_c
       )
@@ -78,15 +78,33 @@ begin
          cout => c_s
       );
       
-   process(clk_Mhz_i, counter_out_s, sum_reg_in_s)
+   process(clk_Mhz_i, enable_s, sum_reg_in_s)
       begin
          if(clk_Mhz_i'event and clk_Mhz_i = '1') then
-            if(counter_out_s = '1') then
-               sum_reg_out_s <= not sum_reg_in_s;
-            else
-               sum_reg_out_s <= sum_reg_out_s;
+            if(enable_s = '1') then
+               sum_reg_out_s <= sum_reg_in_s;
+            --else
+               --sum_reg_out_s <= "0000";
             end if;
          end if;
+      end process;
+      
+      
+   bcd: process(sum_reg_out_s)
+      begin
+         case bcd_i is
+            when "0000" => seven_seg_o <= "1000000";
+            when "0001" => seven_seg_o <= "1111001";
+            when "0010" => seven_seg_o <= "0100100";
+            when "0011" => seven_seg_o <= "0110000";
+            when "0100" => seven_seg_o <= "0011001";
+            when "0101" => seven_seg_o <= "0010010";
+            when "0110" => seven_seg_o <= "0000010";
+            when "0111" => seven_seg_o <= "1111000";
+            when "1000" => seven_seg_o <= "0000000";
+            when "1001" => seven_seg_o <= "0011000";
+            when others => seven_seg_o <= "1111111";
+         end case;
       end process;
 
 end structural;

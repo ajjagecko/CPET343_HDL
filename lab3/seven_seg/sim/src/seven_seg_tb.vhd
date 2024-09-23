@@ -34,7 +34,7 @@ sequential_tb : process
       report "****************** sequential testbench start ****************";
       wait for 80 ns;   -- let all the initial conditions trickle through
       for i in 0 to 9 loop
-        bcd <= std_logic_vector(unsigned(bcd) + 1 );
+        bcd <= std_logic_vector(unsigned(bcd) + 1);
         wait for 40 ns;
       end loop;
       report "****************** sequential testbench stop ****************";
