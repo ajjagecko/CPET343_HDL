@@ -15,7 +15,7 @@ radix define States {
 quietly WaveActivateNextPane {} 0
 add wave -noupdate /seven_seg_tb/uut/clk_Mhz_i
 add wave -noupdate /seven_seg_tb/uut/reset_i
-add wave -noupdate /seven_seg_tb/uut/bcd
+add wave -noupdate /seven_seg_tb/uut/bcd_i
 add wave -noupdate -radix States /seven_seg_tb/uut/seven_seg_o
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {50000 ps} 0}

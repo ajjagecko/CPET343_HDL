@@ -13,14 +13,15 @@ use ieee.numeric_std.all;
 entity seven_seg is
 port (
    clk_Mhz_i   :in std_logic;
-   reset_i       :in std_logic;
-   seven_seg_o :out std_logic_vector(7 downto 0)
+   reset_i     :in std_logic;
+   bcd_i       :in std_logic_vector(3 downto 0);
+   seven_seg_o :out std_logic_vector(6 downto 0)
    );
 end seven_seg;
 
 architecture structural of seven_seg is
 
-component generic_adder is 
+component generic_adder_beh is 
   generic (
     bits    : integer := 4
   );
@@ -45,12 +46,11 @@ component generic_counter is
 end component;
 
 constant bits_c : integer := 4;
-constant max_count_c : integer := 4;
+constant max_count_c : integer := 50000000;
 
 signal sum_reg_in_s   :std_logic_vector(bits_c-1 downto 0);
-signal sum_reg_out_s  :std_logic_vector(bits_c-1 downto 0);
-signal cout_s         :std_logic;
-signal cin_s          :std_logic;
+signal sum_reg_out_s  :std_logic_vector(bits_c-1 downto 0) := "0000";
+signal c_s         :std_logic := '0';
 signal counter_out_s  :std_logic;
 
 begin
@@ -64,18 +64,30 @@ begin
          reset => reset_i,
          output => counter_out_s
       );
-   
-   dut1: generic_adder
+      
+      
+   dut1: generic_adder_beh
       generic map (
          bits => bits_c
       )
       port map (
          a => sum_reg_out_s,
-         b => "0001",
-         cin => cout_s,
+         b => bcd_i,
+         cin => c_s,
          sum => sum_reg_in_s,
-         cout => cin_s
+         cout => c_s
       );
+      
+   process(clk_Mhz_i, counter_out_s, sum_reg_in_s)
+      begin
+         if(clk_Mhz_i'event and clk_Mhz_i = '1') then
+            if(counter_out_s = '1') then
+               sum_reg_out_s <= not sum_reg_in_s;
+            else
+               sum_reg_out_s <= sum_reg_out_s;
+            end if;
+         end if;
+      end process;
 
 end structural;
    

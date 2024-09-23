@@ -13,9 +13,9 @@ architecture arch of seven_seg_tb is
 
 component seven_seg is
   port (
-    clk_Mhz_i             : in std_logic; 
+    clk_Mhz_i         : in std_logic; 
     reset_i           : in std_logic;
-    --bcd             : in std_logic_vector(3 downto 0);
+    bcd_i             : in std_logic_vector(3 downto 0);
     seven_seg_o       : out std_logic_vector(6 downto 0)
   );  
 end component; 
@@ -60,7 +60,7 @@ uut: seven_seg
   port map(        
     clk_Mhz_i      => clk,
     reset_i          => reset,
-    --bcd            => bcd,
+    bcd_i            => bcd,
     seven_seg_o  => open
   );
 end arch;
