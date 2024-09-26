@@ -46,7 +46,7 @@ component generic_counter is
 end component;
 
 constant bits_c : integer := 4;
-constant max_count_c : integer := 2;--50000000;
+constant max_count_c : integer := 50000000;
 
 signal sum_reg_in_s   :std_logic_vector(bits_c-1 downto 0);
 signal sum_reg_out_s  :std_logic_vector(bits_c-1 downto 0) := "0000";
@@ -107,7 +107,7 @@ begin
             when "0111" => seven_seg_o <= "1111000";
             when "1000" => seven_seg_o <= "0000000";
             when "1001" => seven_seg_o <= "0011000";
-            when others => seven_seg_o <= "1111111";
+            when others => seven_seg_o <= "1111110";
          end case;
       end process;
 
