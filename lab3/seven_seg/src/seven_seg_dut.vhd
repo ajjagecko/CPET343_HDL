@@ -107,7 +107,7 @@ begin
             when "0111" => seven_seg_o <= "1111000";
             when "1000" => seven_seg_o <= "0000000";
             when "1001" => seven_seg_o <= "0011000";
-            when others => seven_seg_o <= "1111110";
+            when others => seven_seg_o <= "0111111";
          end case;
       end process;
 
