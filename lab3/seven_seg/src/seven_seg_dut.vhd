@@ -14,7 +14,7 @@ entity seven_seg is
 port (
    clk_Mhz_i   :in std_logic;
    reset_i     :in std_logic;
-   bcd_i       :in std_logic_vector(3 downto 0);
+   --bcd_i       :in std_logic_vector(3 downto 0);
    seven_seg_o :out std_logic_vector(6 downto 0)
    );
 end seven_seg;
@@ -46,7 +46,7 @@ component generic_counter is
 end component;
 
 constant bits_c : integer := 4;
-constant max_count_c : integer := 2;
+constant max_count_c : integer := 2;--50000000;
 
 signal sum_reg_in_s   :std_logic_vector(bits_c-1 downto 0);
 signal sum_reg_out_s  :std_logic_vector(bits_c-1 downto 0) := "0000";
@@ -72,19 +72,23 @@ begin
       )
       port map (
          a => sum_reg_out_s,
-         b => bcd_i,
-         cin => c_s,
+         b => "0001",
+         cin => '0',
          sum => sum_reg_in_s,
-         cout => c_s
+         cout => open
       );
       
    process(clk_Mhz_i, enable_s, sum_reg_in_s)
       begin
-         if(clk_Mhz_i'event and clk_Mhz_i = '1') then
+         if(reset_i = '1') then
+            sum_reg_out_s <= "1111";
+         elsif(clk_Mhz_i'event and clk_Mhz_i = '1') then
             if(enable_s = '1') then
-               sum_reg_out_s <= sum_reg_in_s;
-            --else
-               --sum_reg_out_s <= "0000";
+               if (sum_reg_in_s = "1010") then
+                  sum_reg_out_s <= "0000";
+               else
+                  sum_reg_out_s <= sum_reg_in_s;
+               end if;
             end if;
          end if;
       end process;

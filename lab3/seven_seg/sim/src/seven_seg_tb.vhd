@@ -15,7 +15,7 @@ component seven_seg is
   port (
     clk_Mhz_i         : in std_logic; 
     reset_i           : in std_logic;
-    bcd_i             : in std_logic_vector(3 downto 0);
+    --bcd_i             : in std_logic_vector(3 downto 0);
     seven_seg_o       : out std_logic_vector(6 downto 0)
   );  
 end component; 
@@ -34,7 +34,7 @@ sequential_tb : process
       report "****************** sequential testbench start ****************";
       wait for 80 ns;   -- let all the initial conditions trickle through
       for i in 0 to 9 loop
-        bcd <= std_logic_vector(unsigned(bcd)); --+ 1);
+        --bcd <= std_logic_vector(unsigned(bcd)); --+ 1);
         wait for 40 ns;
       end loop;
       report "****************** sequential testbench stop ****************";
@@ -60,7 +60,7 @@ uut: seven_seg
   port map(        
     clk_Mhz_i      => clk,
     reset_i          => reset,
-    bcd_i            => bcd,
+   -- bcd_i            => bcd,
     seven_seg_o  => open
   );
 end arch;

@@ -6,4 +6,4 @@ vcom -93 -work work ../../src/generic_counter.vhd
 vcom -93 -work work ../src/seven_seg_tb.vhd
 vsim -voptargs=+acc -msgmode both seven_seg_tb
 do wave.do
-run 6 us
+run 1 us
