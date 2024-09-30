@@ -26,11 +26,14 @@ end sub_adder_3bit;
 
 architecture behavioral of sub_adder_3bit is
 
-   signal a_sync_s        :std_logic_vector(2 downto 0);
-   signal b_sync_s        :std_logic_vector(2 downto 0);
-   signal b_2bc_s         :std_logic_vector(2 downto 0);
+   signal a_sync_s        :std_logic_vector(3 downto 0);
+   signal b_sync_s        :std_logic_vector(3 downto 0);
+   signal b_2bc_s         :std_logic_vector(3 downto 0);
+   signal b_add_in_s      :std_logic_vector(3 downto 0);
    signal sub_btn_sync_s  :std_logic;
    signal add_btn_sync_s  :std_logic;
+   signal adder_enable_s  :std_logic;
+   signal prev_sum_s      :std_logic_vector(3 downto 0);
    signal sum_s           :std_logic_vector(3 downto 0);
    
    component generic_adder_arch is 
@@ -61,5 +64,65 @@ architecture behavioral of sub_adder_3bit is
    end component;
 
 begin
-
+   uut0:process(clk,reset,a_i,b_i,sum_s)
+      begin
+         if(reset = '1') then
+            --do thing
+         elsif(clk'event and clk = '1') then
+            a_sync_s <= '0' & a_i;
+            b_sync_s <= '0' & b_i;
+            if(adder_enable_s = '1') then
+               prev_sum_s <= sum_s;
+            end if;
+         end if;
+      end process;
+   
+   uut1: two_bit_comp
+   port map (
+      unsign_i => b_sync_s,
+      two_bit_comp_o => b_2bc_s
+   );
+   
+   uut2: process(sub_btn_i, b_sync_s, b_2bc_s)
+      begin
+         case sub_btn_i is
+            when '1' => b_add_in_s <= b_2bc_s;
+            when others => b_add_in_s <= b_sync_s;
+         end case;
+      end process;
+      
+   uut3: generic_adder_arch
+      generic map (
+         bits => 4
+      )
+      port map (
+         a => a_sync_s,
+         b => b_add_in_s,
+         cin => '0',
+         sum => sum_s,
+         cout => open
+      );
+      
+   uut4: bcd
+      port map (
+         num_i => a_sync_s,
+         bcd_o => a_bcd_o
+      );
+      
+   uut5: bcd
+      port map (
+         num_i => b_sync_s,
+         bcd_o => b_bcd_o
+      );
+      
+   uut6: bcd
+      port map (
+         num_i => prev_sum_s,
+         bcd_o => a_bcd_o
+      );
+   
+   adder_enable_s <= add_btn_i XOR sub_btn_i;
+   
+   
+         
 end architecture;
