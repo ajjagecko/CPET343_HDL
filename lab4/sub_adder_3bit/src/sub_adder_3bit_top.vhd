@@ -20,6 +20,8 @@ port (
    sub_btn_i  :in std_logic;
    a_bcd_o        :out std_logic_vector(6 downto 0);
    b_bcd_o        :out std_logic_vector(6 downto 0);
+   sum_temp_o     :out std_logic_vector(3 downto 0);
+   prev_sum_temp_o     :out std_logic_vector(3 downto 0);
    result_bcd_o   :out std_logic_vector(6 downto 0)
    );
 end sub_adder_3bit;
@@ -64,13 +66,19 @@ architecture behavioral of sub_adder_3bit is
    end component;
 
 begin
-   uut0:process(clk,reset,a_i,b_i,sum_s)
+   uut0:process(clk,reset,a_i,b_i,sum_s,adder_enable_s)
       begin
          if(reset = '1') then
-            --do thing
+            prev_sum_s <= "0000";
+            a_sync_s <= "0000";
+            b_sync_s <= "0000";
+            add_btn_sync_s <= '0';
+            sub_btn_sync_s <= '0';
          elsif(clk'event and clk = '1') then
             a_sync_s <= '0' & a_i;
             b_sync_s <= '0' & b_i;
+            add_btn_sync_s <= add_btn_i;
+            sub_btn_sync_s <= sub_btn_i;
             if(adder_enable_s = '1') then
                prev_sum_s <= sum_s;
             end if;
@@ -118,11 +126,12 @@ begin
    uut6: bcd
       port map (
          num_i => prev_sum_s,
-         bcd_o => a_bcd_o
+         bcd_o => result_bcd_o
       );
    
-   adder_enable_s <= add_btn_i XOR sub_btn_i;
+   adder_enable_s <= add_btn_sync_s XOR sub_btn_sync_s;
    
-   
+   sum_temp_o <= sum_s;
+   prev_sum_temp_o <= prev_sum_s;
          
 end architecture;

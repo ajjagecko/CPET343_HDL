@@ -13,17 +13,8 @@ radix define States {
     -default default
 }
 quietly WaveActivateNextPane {} 0
-add wave -noupdate /sub_adder_3bit_tb/uut/clk
-add wave -noupdate /sub_adder_3bit_tb/uut/reset
-add wave -noupdate /sub_adder_3bit_tb/uut/a_i
-add wave -noupdate /sub_adder_3bit_tb/uut/b_i
-add wave -noupdate /sub_adder_3bit_tb/uut/add_btn_i
-add wave -noupdate /sub_adder_3bit_tb/uut/sub_btn_i
-add wave -noupdate -radix States /sub_adder_3bit_tb/uut/a_bcd_o
-add wave -noupdate -radix States /sub_adder_3bit_tb/uut/b_bcd_o
-add wave -noupdate -radix States /sub_adder_3bit_tb/uut/result_bcd_o
-add wave -noupdate /sub_adder_3bit_tb/uut/sum_temp_o
-add wave -noupdate /sub_adder_3bit_tb/uut/prev_sum_temp_o
+add wave -noupdate /two_bit_comp_tb/uut/unsign_i
+add wave -noupdate /two_bit_comp_tb/uut/two_bit_comp_o
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {50000 ps} 0}
 quietly wave cursor active 1
