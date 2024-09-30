@@ -64,6 +64,27 @@ architecture behavioral of sub_adder_3bit is
          two_bit_comp_o :out std_logic_vector(3 downto 0)
       );
    end component;
+   
+   component rising_edge_synchronizer is
+      port (
+         clk               : in std_logic;
+         reset             : in std_logic;
+         input             : in std_logic;
+         edge              : out std_logic
+      );
+   end component;
+   
+   component generic_sync_arch is
+      generic (
+         bits    : integer := 4
+      );   
+      port (
+         clk               : in std_logic;
+         reset             : in std_logic;
+         input             : in std_logic_vector(bits-1 downto 0);
+         edge              : out std_logic
+      );
+   end component;
 
 begin
    uut0:process(clk,reset,a_i,b_i,sum_s,adder_enable_s)
@@ -72,13 +93,9 @@ begin
             prev_sum_s <= "0000";
             a_sync_s <= "0000";
             b_sync_s <= "0000";
-            add_btn_sync_s <= '0';
-            sub_btn_sync_s <= '0';
          elsif(clk'event and clk = '1') then
             a_sync_s <= '0' & a_i;
             b_sync_s <= '0' & b_i;
-            add_btn_sync_s <= add_btn_i;
-            sub_btn_sync_s <= sub_btn_i;
             if(adder_enable_s = '1') then
                prev_sum_s <= sum_s;
             end if;
@@ -128,8 +145,24 @@ begin
          num_i => prev_sum_s,
          bcd_o => result_bcd_o
       );
+      
+   uut7: rising_edge_synchronizer
+      port map(
+         clk   => clk,
+         reset => reset,
+         input => add_btn_i,
+         edge  => add_btn_sync_s
+      );
+      
+   uut8: rising_edge_synchronizer
+      port map(
+         clk   => clk,
+         reset => reset,
+         input => sub_btn_i,
+         edge  => sub_btn_sync_s
+      );
    
-   adder_enable_s <= add_btn_sync_s XOR sub_btn_sync_s;
+   adder_enable_s <= add_btn_sync_s OR sub_btn_sync_s;
    
    sum_temp_o <= sum_s;
    prev_sum_temp_o <= prev_sum_s;
