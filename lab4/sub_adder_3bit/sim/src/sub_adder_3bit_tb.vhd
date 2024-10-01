@@ -32,8 +32,8 @@ signal clk          : std_logic := '0';
 signal reset        : std_logic := '1';
 signal a_i        :std_logic_vector(2 downto 0) := "000";
 signal b_i        :std_logic_vector(2 downto 0) := "000";
-signal add_btn_i  :std_logic;
-signal sub_btn_i  :std_logic;
+signal add_btn_i  :std_logic := '0';
+signal sub_btn_i  :std_logic := '1';
 signal a_bcd_o        :std_logic_vector(6 downto 0);
 signal b_bcd_o        :std_logic_vector(6 downto 0);
 signal sum_temp_o     :std_logic_vector(3 downto 0);
@@ -46,21 +46,19 @@ begin
 sequential_tb : process 
     begin
       report "****************** sequential testbench start ****************";
-      wait for 80 ns;   -- let all the initial conditions trickle through
-      for i in 0 to 7 loop
-         for j in 0 to 7 loop
-            a_i <= std_logic_vector(unsigned(a_i) + 1);
-            wait for 2 ns;
-            add_btn_i <= '1';
-            wait for 10 ns;
-            add_btn_i <= '0';
-            wait for 7 ns;
-            sub_btn_i <= '1';
-            wait for 10 ns;
-            sub_btn_i <= '0';
-            wait for 11 ns;
+      wait for 80ns;   -- let all the initial conditions trickle through
+      for i in 0 to 2 loop
+         add_btn_i <= not add_btn_i;
+         wait for 10ns;
+         sub_btn_i <= not sub_btn_i;
+         wait for 10ns;
+         for k in 0 to 7 loop
+            for j in 0 to 7 loop
+               a_i <= std_logic_vector(unsigned(a_i) + 1);
+               wait for 20ns;
+            end loop;
+            b_i <= std_logic_vector(unsigned(b_i) + 1);
          end loop;
-         b_i <= std_logic_vector(unsigned(b_i) + 1);
       end loop;
       report "****************** sequential testbench stop ****************";
       wait;

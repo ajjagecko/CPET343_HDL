@@ -22,6 +22,9 @@ port (
    b_bcd_o        :out std_logic_vector(6 downto 0);
    sum_temp_o     :out std_logic_vector(3 downto 0);
    prev_sum_temp_o     :out std_logic_vector(3 downto 0);
+   adder_enable_temp_o :out std_logic;
+   sub_sync_o          :out std_logic;
+   add_sync_o          :out std_logic;
    result_bcd_o   :out std_logic_vector(6 downto 0)
    );
 end sub_adder_3bit;
@@ -34,7 +37,7 @@ architecture behavioral of sub_adder_3bit is
    signal b_add_in_s      :std_logic_vector(3 downto 0);
    signal sub_btn_sync_s  :std_logic;
    signal add_btn_sync_s  :std_logic;
-   signal adder_enable_s  :std_logic;
+   signal sub_enable_s    :std_logic;
    signal prev_sum_s      :std_logic_vector(3 downto 0);
    signal sum_s           :std_logic_vector(3 downto 0);
    
@@ -87,19 +90,30 @@ architecture behavioral of sub_adder_3bit is
    end component;
 
 begin
-   uut0:process(clk,reset,a_i,b_i,sum_s,adder_enable_s)
+   uut7: rising_edge_synchronizer
+      port map(
+         clk   => clk,
+         reset => reset,
+         input => add_btn_i,
+         edge  => add_btn_sync_s
+      );
+      
+   uut8: rising_edge_synchronizer
+      port map(
+         clk   => clk,
+         reset => reset,
+         input => sub_btn_i,
+         edge  => sub_btn_sync_s
+      );
+      
+   -- Reimplement syncs for a and b
+   uut9: process(clk, reset)
       begin
-         if(reset = '1') then
-            prev_sum_s <= "0000";
-            a_sync_s <= "0000";
-            b_sync_s <= "0000";
-         elsif(clk'event and clk = '1') then
+         if (clk'event and clk = '1') then
             a_sync_s <= '0' & a_i;
             b_sync_s <= '0' & b_i;
-            if(adder_enable_s = '1') then
-               prev_sum_s <= sum_s;
-            end if;
-         end if;
+            prev_sum_s <= sum_s;
+         end if;   
       end process;
    
    uut1: two_bit_comp
@@ -108,9 +122,14 @@ begin
       two_bit_comp_o => b_2bc_s
    );
    
-   uut2: process(sub_btn_i, b_sync_s, b_2bc_s)
+   uut2: process(sub_btn_sync_s, add_btn_sync_s, b_2bc_s, b_sync_s)
       begin
-         case sub_btn_i is
+         if(sub_btn_sync_s = '1') then
+            sub_enable_s <= '1';
+         elsif (add_btn_sync_s = '1') then
+            sub_enable_s <= '0';
+         end if;
+         case sub_enable_s is
             when '1' => b_add_in_s <= b_2bc_s;
             when others => b_add_in_s <= b_sync_s;
          end case;
@@ -145,26 +164,9 @@ begin
          num_i => prev_sum_s,
          bcd_o => result_bcd_o
       );
-      
-   uut7: rising_edge_synchronizer
-      port map(
-         clk   => clk,
-         reset => reset,
-         input => add_btn_i,
-         edge  => add_btn_sync_s
-      );
-      
-   uut8: rising_edge_synchronizer
-      port map(
-         clk   => clk,
-         reset => reset,
-         input => sub_btn_i,
-         edge  => sub_btn_sync_s
-      );
-   
-   adder_enable_s <= add_btn_sync_s OR sub_btn_sync_s;
    
    sum_temp_o <= sum_s;
-   prev_sum_temp_o <= prev_sum_s;
+   sub_sync_o <= sub_btn_sync_s;
+   add_sync_o <= add_btn_sync_s;
          
 end architecture;

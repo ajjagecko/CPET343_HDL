@@ -10,20 +10,31 @@ radix define States {
     "7'b1111000" "7" -color "red",
     "7'b0000000" "8" -color "red",
     "7'b0011000" "9" -color "red",
+    "7'b0100000" "a" -color "red",
+    "7'b0000011" "b" -color "red",
+    "7'b0100111" "c" -color "red",
+    "7'b0100001" "d" -color "red",
+    "7'b0000100" "e" -color "red",
+    "7'b0111000" "f" -color "red",
     -default default
 }
 quietly WaveActivateNextPane {} 0
 add wave -noupdate /sub_adder_3bit_tb/uut/clk
 add wave -noupdate /sub_adder_3bit_tb/uut/reset
+
 add wave -noupdate /sub_adder_3bit_tb/uut/a_i
-add wave -noupdate /sub_adder_3bit_tb/uut/b_i
-add wave -noupdate /sub_adder_3bit_tb/uut/add_btn_i
-add wave -noupdate /sub_adder_3bit_tb/uut/sub_btn_i
 add wave -noupdate -radix States /sub_adder_3bit_tb/uut/a_bcd_o
+add wave -noupdate /sub_adder_3bit_tb/uut/b_i
 add wave -noupdate -radix States /sub_adder_3bit_tb/uut/b_bcd_o
-add wave -noupdate -radix States /sub_adder_3bit_tb/uut/result_bcd_o
+
+add wave -noupdate /sub_adder_3bit_tb/uut/add_btn_i
+add wave -noupdate /sub_adder_3bit_tb/uut/add_sync_o
+add wave -noupdate /sub_adder_3bit_tb/uut/sub_btn_i
+add wave -noupdate /sub_adder_3bit_tb/uut/sub_sync_o
+
 add wave -noupdate /sub_adder_3bit_tb/uut/sum_temp_o
-add wave -noupdate /sub_adder_3bit_tb/uut/prev_sum_temp_o
+add wave -noupdate -radix States /sub_adder_3bit_tb/uut/result_bcd_o
+
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {50000 ps} 0}
 quietly wave cursor active 1

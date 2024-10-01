@@ -9,4 +9,4 @@ vcom -93 -work work ../../src/two_bit_comp/src/two_bit_comp.vhd
 vcom -93 -work work ../src/sub_adder_3bit_tb.vhd
 vsim -voptargs=+acc -msgmode both sub_adder_3bit_tb
 do wave.do
-run 1 us
+run 3000 ns
