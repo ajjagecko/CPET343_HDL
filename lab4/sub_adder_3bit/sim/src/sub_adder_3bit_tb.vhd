@@ -22,8 +22,9 @@ component sub_adder_3bit is
    a_bcd_o        :out std_logic_vector(6 downto 0);
    b_bcd_o        :out std_logic_vector(6 downto 0);
    sum_temp_o     :out std_logic_vector(3 downto 0);
-   prev_sum_temp_o     :out std_logic_vector(3 downto 0);
-   result_bcd_o   :out std_logic_vector(6 downto 0)
+   result_bcd_o   :out std_logic_vector(6 downto 0);
+   a_edge_o   :out std_logic;
+   b_edge_o   :out std_logic
   );  
 end component; 
 
@@ -39,6 +40,8 @@ signal b_bcd_o        :std_logic_vector(6 downto 0);
 signal sum_temp_o     :std_logic_vector(3 downto 0);
 signal prev_sum_temp_o     :std_logic_vector(3 downto 0);
 signal result_bcd_o   :std_logic_vector(6 downto 0);
+signal a_edge_o   :std_logic;
+signal b_edge_o   :std_logic;
 
 begin
 
@@ -90,7 +93,8 @@ uut: sub_adder_3bit
    a_bcd_o       => a_bcd_o,
    b_bcd_o       => b_bcd_o,
    sum_temp_o    => sum_temp_o,
-   prev_sum_temp_o => prev_sum_temp_o,
-   result_bcd_o  => result_bcd_o  
+   result_bcd_o  => result_bcd_o  ,
+   a_edge_o      => a_edge_o,
+   b_edge_o      => b_edge_o
   );
 end arch;
