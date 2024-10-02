@@ -116,11 +116,16 @@ begin
    
    uut11: process(a_edge_s, b_edge_s)
       begin
-         if (a_edge_s = '1') then
-            a_sync_s <= '0' & a_i;
-         end if;
-         if (b_edge_s = '1') then
-            b_sync_s <= '0' & b_i;
+         if (reset = '1') then
+            a_sync_s <= "0000";
+            b_sync_s <= "0000";
+         else
+            if (a_edge_s = '1') then
+               a_sync_s <= '0' & a_i;
+            end if;
+            if (b_edge_s = '1') then
+               b_sync_s <= '0' & b_i;
+            end if;
          end if;
       end process;
       
@@ -143,7 +148,9 @@ begin
    -- Reimplement syncs for a and b
    uut9: process(clk, reset)
       begin
-         if (clk'event and clk = '1') then
+         if (reset = '1') then
+            prev_sum_s <= "0000";
+         elsif (clk'event and clk = '1') then
             prev_sum_s <= sum_s;
          end if;   
       end process;
@@ -156,10 +163,14 @@ begin
    
    uut2: process(sub_btn_sync_s, add_btn_sync_s, b_2bc_s, b_sync_s)
       begin
-         if(sub_btn_sync_s = '1') then
-            sub_enable_s <= '1';
-         elsif (add_btn_sync_s = '1') then
+         if (reset = '1') then
             sub_enable_s <= '0';
+         else
+            if(sub_btn_sync_s = '1') then
+               sub_enable_s <= '1';
+            elsif (add_btn_sync_s = '1') then
+               sub_enable_s <= '0';
+            end if;
          end if;
          case sub_enable_s is
             when '1' => b_add_in_s <= b_2bc_s;
@@ -198,9 +209,9 @@ begin
       );
    
    sum_temp_o <= sum_s;
-   sub_sync_o <= sub_btn_sync_s;
-   add_sync_o <= add_btn_sync_s;
-   a_edge_o <= a_edge_s;
-   b_edge_o <= b_edge_s;
+   sub_sync_o <= not sub_btn_sync_s;
+   add_sync_o <= not add_btn_sync_s;
+   a_edge_o <= not a_edge_s;
+   b_edge_o <= not b_edge_s;
          
 end architecture;
