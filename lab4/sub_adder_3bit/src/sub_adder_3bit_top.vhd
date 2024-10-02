@@ -15,8 +15,6 @@ port (
    clk        :in std_logic;
    reset      :in std_logic;
    a_i        :in std_logic_vector(2 downto 0);
-   --a_edge_o   :out std_logic;
-   --b_edge_o   :out std_logic;
    b_i        :in std_logic_vector(2 downto 0);
    add_btn_i  :in std_logic;
    sub_btn_i  :in std_logic;
@@ -32,9 +30,9 @@ end sub_adder_3bit;
 architecture behavioral of sub_adder_3bit is
 
    signal a_sync_s        :std_logic_vector(3 downto 0);
-   signal a_edge_s        :std_logic;
    signal b_sync_s        :std_logic_vector(3 downto 0);
-   signal b_edge_s        :std_logic;
+   signal a_async_s        :std_logic_vector(3 downto 0);
+   signal b_async_s        :std_logic_vector(3 downto 0);
    signal b_2bc_s         :std_logic_vector(3 downto 0);
    signal b_add_in_s      :std_logic_vector(3 downto 0);
    signal sub_btn_sync_s  :std_logic;
@@ -86,48 +84,35 @@ architecture behavioral of sub_adder_3bit is
       port (
          clk               : in std_logic;
          reset             : in std_logic;
-         input             : in std_logic_vector(bits-1 downto 0);
-         edge              : out std_logic
+         async_i           : in std_logic_vector(bits-1 downto 0);
+         sync_o            : out std_logic_vector(bits-1 downto 0)
       );
    end component;
 
 begin
+   a_async_s <= '0' & a_i;
+   b_async_s <= '0' & b_i;
    uut0: generic_sync_arch
       generic map (
-         bits => 3
+         bits => 4
       )
       port map(
          clk   => clk,
          reset => reset,
-         input => a_i,
-         edge  => a_edge_s
+         async_i => a_async_s,
+         sync_o  => a_sync_s
       );
    
    uut10: generic_sync_arch
       generic map (
-         bits => 3
+         bits => 4
       )
       port map(
          clk   => clk,
          reset => reset,
-         input => b_i,
-         edge  => b_edge_s
+         async_i => b_async_s,
+         sync_o  => b_sync_s
       );
-   
-   uut11: process(a_edge_s, b_edge_s)
-      begin
-         if (reset = '1') then
-            a_sync_s <= "0000";
-            b_sync_s <= "0000";
-         else
-            if (a_edge_s = '1') then
-               a_sync_s <= '0' & a_i;
-            end if;
-            if (b_edge_s = '1') then
-               b_sync_s <= '0' & b_i;
-            end if;
-         end if;
-      end process;
       
    uut7: rising_edge_synchronizer
       port map(
@@ -145,7 +130,6 @@ begin
          edge  => sub_btn_sync_s
       );
       
-   -- Reimplement syncs for a and b
    uut9: process(clk, reset)
       begin
          if (reset = '1') then
@@ -211,7 +195,5 @@ begin
    --sum_temp_o <= sum_s;
    --sub_sync_o <= not sub_btn_sync_s;
    --add_sync_o <= not add_btn_sync_s;
-   --a_edge_o <= not a_edge_s;
-   --b_edge_o <= not b_edge_s;
          
 end architecture;

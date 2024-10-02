@@ -13,36 +13,30 @@ entity generic_sync_arch is
     port (
     clk               : in std_logic;
     reset             : in std_logic;
-    input             : in std_logic_vector(bits-1 downto 0);
-    edge              : out std_logic
+    async_i           : in std_logic_vector(bits-1 downto 0);
+    sync_o            : out std_logic_vector(bits-1 downto 0)
   );
 end generic_sync_arch;
 
 architecture beh of generic_sync_arch is
 
-signal edge_vec_s :std_logic_vector(bits-1 downto 0);
-signal edge_carry_s :std_logic := '0';
-
-component rising_edge_synchronizer is
+component synchronizer is 
   port (
     clk               : in std_logic;
     reset             : in std_logic;
-    input             : in std_logic;
-    edge              : out std_logic
+    async_in          : in std_logic;
+    sync_out          : out std_logic
   );
 end component;
 
 begin
    syncs: for i in 0 to bits-1 generate
-      sync: rising_edge_synchronizer
+      sync: synchronizer
          port map(
             clk   => clk,
             reset => reset,
-            input => input(i),
-            edge  => edge_vec_s(i)
+            async_in => async_i(i),
+            sync_out => sync_o(i)
          );
    end generate;
-   
-   edge <= edge_vec_s(0) or edge_vec_s(1) or edge_vec_s(2);
-   
 end architecture;

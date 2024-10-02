@@ -23,6 +23,7 @@ set_global_assignment -name VHDL_FILE ../../src/generic_adder_arch/generic_adder
 set_global_assignment -name VHDL_FILE ../../src/generic_adder_arch/full_adder_single_bit_arch.vhd
 set_global_assignment -name VHDL_FILE ../../src/bcd/bcd_4bit.vhd
 set_global_assignment -name VHDL_FILE ../../src/two_bit_comp/src/two_bit_comp.vhd
+set_global_assignment -name VHDL_FILE ../../src/synchronizer.vhd
 
 set_location_assignment PIN_AB12 -to reset
 set_location_assignment PIN_AF14 -to clk
