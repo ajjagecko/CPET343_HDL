@@ -90,8 +90,11 @@ architecture behavioral of sub_adder_3bit is
    end component;
 
 begin
+   --Assigning switch inputs to 4 bit signals for addition later, I could do this after sync, but chose to do it here since it changed less
    a_async_s <= '0' & a_i;
    b_async_s <= '0' & b_i;
+   
+   --Synchronizer for a_async_s
    uut0: generic_sync_arch
       generic map (
          bits => 4
@@ -103,6 +106,7 @@ begin
          sync_o  => a_sync_s
       );
    
+   --Synchronizer for b_async_s
    uut10: generic_sync_arch
       generic map (
          bits => 4
@@ -114,6 +118,7 @@ begin
          sync_o  => b_sync_s
       );
       
+   --RES for add button
    uut7: rising_edge_synchronizer
       port map(
          clk   => clk,
@@ -121,7 +126,8 @@ begin
          input => add_btn_i,
          edge  => add_btn_sync_s
       );
-      
+   
+   --RES for sub button
    uut8: rising_edge_synchronizer
       port map(
          clk   => clk,
@@ -129,22 +135,23 @@ begin
          input => sub_btn_i,
          edge  => sub_btn_sync_s
       );
-      
+   
+   --Clock for BCD input
    uut9: process(clk, reset)
       begin
-         if (reset = '1') then
-            prev_sum_s <= "0000";
-         elsif (clk'event and clk = '1') then
+         if (clk'event and clk = '1') then
             prev_sum_s <= sum_s;
          end if;   
       end process;
    
+   --Two's Complement on b_sync_s
    uut1: two_bit_comp
    port map (
       unsign_i => b_sync_s,
       two_bit_comp_o => b_2bc_s
    );
    
+   --Selection Logic for when to add or subtract, and which b to use
    uut2: process(sub_btn_sync_s, add_btn_sync_s, b_2bc_s, b_sync_s)
       begin
          if (reset = '1') then
@@ -162,6 +169,7 @@ begin
          end case;
       end process;
       
+   --Generic Adder
    uut3: generic_adder_arch
       generic map (
          bits => 4
@@ -173,19 +181,22 @@ begin
          sum => sum_s,
          cout => open
       );
-      
+   
+   --BCD for a_sync
    uut4: bcd
       port map (
          num_i => a_sync_s,
          bcd_o => a_bcd_o
       );
-      
+   
+   --BCD for b_sync
    uut5: bcd
       port map (
          num_i => b_sync_s,
          bcd_o => b_bcd_o
       );
-      
+   
+   --BCD for sum
    uut6: bcd
       port map (
          num_i => prev_sum_s,
