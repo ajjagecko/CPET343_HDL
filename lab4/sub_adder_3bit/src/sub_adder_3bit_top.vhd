@@ -15,16 +15,16 @@ port (
    clk        :in std_logic;
    reset      :in std_logic;
    a_i        :in std_logic_vector(2 downto 0);
-   a_edge_o   :out std_logic;
-   b_edge_o   :out std_logic;
+   --a_edge_o   :out std_logic;
+   --b_edge_o   :out std_logic;
    b_i        :in std_logic_vector(2 downto 0);
    add_btn_i  :in std_logic;
    sub_btn_i  :in std_logic;
    a_bcd_o        :out std_logic_vector(6 downto 0);
    b_bcd_o        :out std_logic_vector(6 downto 0);
-   sum_temp_o     :out std_logic_vector(3 downto 0);
-   sub_sync_o     :out std_logic;
-   add_sync_o     :out std_logic;
+   --sum_temp_o     :out std_logic_vector(3 downto 0);
+   --sub_sync_o     :out std_logic;
+   --add_sync_o     :out std_logic;
    result_bcd_o   :out std_logic_vector(6 downto 0)
    );
 end sub_adder_3bit;
@@ -208,10 +208,10 @@ begin
          bcd_o => result_bcd_o
       );
    
-   sum_temp_o <= sum_s;
-   sub_sync_o <= not sub_btn_sync_s;
-   add_sync_o <= not add_btn_sync_s;
-   a_edge_o <= not a_edge_s;
-   b_edge_o <= not b_edge_s;
+   --sum_temp_o <= sum_s;
+   --sub_sync_o <= not sub_btn_sync_s;
+   --add_sync_o <= not add_btn_sync_s;
+   --a_edge_o <= not a_edge_s;
+   --b_edge_o <= not b_edge_s;
          
 end architecture;

@@ -57,12 +57,6 @@ set_location_assignment PIN_AF28 -to result_bcd_o[4]
 set_location_assignment PIN_AG28 -to result_bcd_o[5]
 set_location_assignment PIN_AH28 -to result_bcd_o[6]
 
-
-set_location_assignment PIN_AJ29 -to a_edge_o
-set_location_assignment PIN_AH29 -to b_edge_o
-set_location_assignment PIN_AD27 -to add_sync_o
-set_location_assignment PIN_AC25 -to sub_sync_o
-
 set_location_assignment PIN_AA15 -to add_btn_i
 set_location_assignment PIN_AA14 -to sub_btn_i
 
