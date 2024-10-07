@@ -10,6 +10,7 @@ entity eight_bit_sub_adder is
       reset     :in std_logic;
       switch_i  :in std_logic_vector(7 downto 0);
       btn_i     :in std_logic;
+      sum_o     :out std_logic_vector(11 downto 0);
       bcd_hun_o :out std_logic_vector(6 downto 0);
       bcd_ten_o :out std_logic_vector(6 downto 0);
       bcd_one_o :out std_logic_vector(6 downto 0)
@@ -21,15 +22,14 @@ architecture beh of eight_bit_sub_adder is
 type STATE_TYPE is (st_input_a, st_input_b, st_disp_sum, st_disp_diff);
 signal state_next_s, state_pres_s :STATE_TYPE;
 
-constant bits :integer := 8;
-
 signal btn_sync_s    :std_logic;
+signal carry_out_s   :std_logic;
 
 signal switch_sync_s :std_logic_vector(7 downto 0);
-signal a_in_s        :std_logic_vector(7 downto 0);
-signal b_in_s        :std_logic_vector(7 downto 0);
+signal a_in_s        :std_logic_vector(8 downto 0);
+signal b_in_s        :std_logic_vector(8 downto 0);
 signal sub_en_s      :std_logic;
-signal sum_s         :std_logic_vector(7 downto 0);
+signal sum_s         :std_logic_vector(8 downto 0);
 
 signal display_sel_s   :std_logic_vector(11 downto 0);
 signal dd_hun_s      :std_logic_vector(3 downto 0);
@@ -46,10 +46,11 @@ component double_dabble is
 end component; 
 
 begin
+   sum_o <= display_sel_s;
    -- Synchronizer for switch_i
    dut00: generic_sync_arch
       generic map (
-         bits => bits
+         bits => 8
       )
       port map (
          clk     => clk,
@@ -103,9 +104,9 @@ begin
                
             when st_disp_diff =>
                if (btn_sync_s = '1') then
-                  state_next_s <= st_disp_diff;
-               else
                   state_next_s <= st_input_a;
+               else
+                  state_next_s <= st_disp_diff;
                end if;
                
             when others =>
@@ -122,36 +123,36 @@ begin
          end case;
       end process;
       
-   dut05: process(state_pres_s)
+   dut05: process(state_pres_s, switch_sync_s)
       begin
          case state_pres_s is
-            when st_input_a => a_in_s <= switch_sync_s;
+            when st_input_a => a_in_s <= '0' & switch_sync_s;
             when others     => a_in_s <= a_in_s;
          end case;
       end process;
       
-   dut06: process(state_pres_s)
+   dut06: process(state_pres_s, switch_sync_s)
       begin
          case state_pres_s is
-            when st_input_b => b_in_s <= switch_sync_s;
+            when st_input_b => b_in_s <= '0' & switch_sync_s;
             when others     => b_in_s <= b_in_s;
          end case;
       end process;
    
-   dut07: process(state_pres_s)
+   dut07: process(state_pres_s, a_in_s, b_in_s, carry_out_s, sum_s)
       begin
          case state_pres_s is
-            when st_input_a   => display_sel_s <= "0000" & a_in_s;
-            when st_input_b   => display_sel_s <= "0000" & b_in_s;
-            when st_disp_sum  => display_sel_s <= "0000" & sum_s;
-            when st_disp_diff => display_sel_s <= "0000" & sum_s;
+            when st_input_a   => display_sel_s <= "000" & a_in_s;
+            when st_input_b   => display_sel_s <= "000" & b_in_s;
+            when st_disp_sum  => display_sel_s <= "000" & sum_s;
+            when st_disp_diff => display_sel_s <= "000" & sum_s;
             when others       => display_sel_s <= display_sel_s;
          end case;
       end process;
    
    dut08: generic_sub_arch
       generic map (
-         bits => bits
+         bits => 9
       )
       port map (
          a_i      => a_in_s,
@@ -159,7 +160,7 @@ begin
          carry_i  => '0',
          sub_en_i => sub_en_s,
          sum_o    => sum_s,
-         carry_o  => open
+         carry_o  => carry_out_s
       );
       
    dut09: double_dabble

@@ -25,6 +25,8 @@ add wave -noupdate /eight_bit_sub_adder_tb/dut/reset
 add wave -noupdate /eight_bit_sub_adder_tb/dut/switch_i
 add wave -noupdate /eight_bit_sub_adder_tb/dut/btn_i
 
+add wave -noupdate /eight_bit_sub_adder_tb/dut/sum_o
+
 add wave -noupdate -radix States /eight_bit_sub_adder_tb/dut/bcd_hun_o
 add wave -noupdate -radix States /eight_bit_sub_adder_tb/dut/bcd_ten_o
 add wave -noupdate -radix States /eight_bit_sub_adder_tb/dut/bcd_one_o
