@@ -37,7 +37,7 @@ signal dd_one_s      :std_logic_vector(3 downto 0);
 
 begin
    -- Synchronizer for switch_i
-   dut0: generic_sync_arch
+   dut00: generic_sync_arch
       generic map (
          bits => bits
       )
@@ -48,7 +48,7 @@ begin
          sync_o  => switch_sync_s
       );
       
-   dut1: rising_edge_synchronizer
+   dut01: rising_edge_synchronizer
       port map (
          clk   => clk,
          reset => reset,
@@ -58,7 +58,7 @@ begin
    
    -- Add STATE MACHINE AND DEMUX HERE
    
-   dut3: generic_sub_arch
+   dut05: generic_sub_arch
       generic map (
          bits => bits
       )
@@ -71,4 +71,21 @@ begin
          carry_o  => open
       );
       
+   dut08: bcd_4bit
+      port map (
+         bcd_i   =>   dd_hun_s,
+         bcd_o   =>   bcd_hun_o
+      );
+   
+   dut09: bcd_4bit
+      port map (
+         bcd_i   =>   dd_ten_s,
+         bcd_o   =>   bcd_ten_o
+      );
+      
+   dut10: bcd_4bit
+      port map (
+         bcd_i   =>   dd_one_s,
+         bcd_o   =>   bcd_one_o
+      );
 end architecture;
