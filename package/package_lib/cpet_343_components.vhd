@@ -24,11 +24,11 @@ package cpet_343_components is
          bits    : integer := 4
       );
       port (
-         a_i        : in  std_logic_vector(4 downto 0);
-         b_i        : in  std_logic_vector(4 downto 0);
+         a_i        : in  std_logic_vector(bits-1 downto 0);
+         b_i        : in  std_logic_vector(bits-1 downto 0);
          carry_i    : in  std_logic;
          sub_en_i   : in  std_logic;
-         sum_o      : out std_logic_vector(4 downto 0);
+         sum_o      : out std_logic_vector(bits-1 downto 0);
          carry_o    : out std_logic
       );  
    end component;
