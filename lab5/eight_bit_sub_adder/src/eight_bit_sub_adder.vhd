@@ -81,7 +81,7 @@ begin
          case state_pres_s is
          
             when st_input_a =>
-               led_o <= "1110";
+               led_o <= "0001";
                if (btn_sync_s = '1') then
                   state_next_s <= st_input_b;
                else
@@ -89,7 +89,7 @@ begin
                end if;
                
             when st_input_b =>
-               led_o <= "1101";
+               led_o <= "0010";
                if (btn_sync_s = '1') then
                   state_next_s <= st_disp_sum;
                else
@@ -97,7 +97,7 @@ begin
                end if;
                
             when st_disp_sum =>
-               led_o <= "1011";
+               led_o <= "0100";
                if (btn_sync_s = '1') then
                   state_next_s <= st_disp_diff;
                else
@@ -105,7 +105,7 @@ begin
                end if;
                
             when st_disp_diff =>
-               led_o <= "0111";
+               led_o <= "1000";
                if (btn_sync_s = '1') then
                   state_next_s <= st_input_a;
                else

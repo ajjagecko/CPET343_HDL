@@ -19,11 +19,12 @@ set_global_assignment -name PROJECT_OUTPUT_DIRECTORY ../output_files
 set_global_assignment -name VHDL_FILE ../../src/package_lib/cpet_343_components.vhd
 set_global_assignment -name VHDL_FILE ../../src/package_lib/rising_edge_synchronizer.vhd
 set_global_assignment -name VHDL_FILE ../../src/package_lib/bcd_4bit.vhd
+set_global_assignment -name VHDL_FILE ../../src/package_lib/generic_sub_arch.vhd
 set_global_assignment -name VHDL_FILE ../../src/eight_bit_sub_adder.vhd
 set_global_assignment -name VHDL_FILE ../../src/double_dabble.vhd
 set_global_assignment -name VHDL_FILE ../../src/package_lib/two_comp.vhd
 set_global_assignment -name VHDL_FILE ../../src/package_lib/generic_adder_arch/generic_adder_arch.vhd
-set_global_assignment -name VHDL_FILE ../../src/package_lib/generic_adder_arch/full_adder_single_bit.vhd
+set_global_assignment -name VHDL_FILE ../../src/package_lib/generic_adder_arch/full_adder_single_bit_arch.vhd
 set_global_assignment -name VHDL_FILE ../../src/package_lib/generic_sync_arch.vhd
 set_global_assignment -name VHDL_FILE ../../src/package_lib/synchronizer.vhd
 
