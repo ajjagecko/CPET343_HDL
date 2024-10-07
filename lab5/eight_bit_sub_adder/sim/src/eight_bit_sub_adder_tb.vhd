@@ -17,7 +17,7 @@ component eight_bit_sub_adder is
       reset     :in std_logic;
       switch_i  :in std_logic_vector(7 downto 0);
       btn_i     :in std_logic;
-      sum_o     :out std_logic_vector(11 downto 0);
+      led_o     :out std_logic_vector(3 downto 0);
       bcd_hun_o :out std_logic_vector(6 downto 0);
       bcd_ten_o :out std_logic_vector(6 downto 0);
       bcd_one_o :out std_logic_vector(6 downto 0)
@@ -32,7 +32,7 @@ signal btn_i     :std_logic := '0';
 signal bcd_hun_o :std_logic_vector(6 downto 0);
 signal bcd_ten_o :std_logic_vector(6 downto 0);
 signal bcd_one_o :std_logic_vector(6 downto 0);
-signal sum_o     :std_logic_vector(11 downto 0);
+signal led_o     :std_logic_vector(3 downto 0);
 
 constant TWO    :std_logic_vector(7 downto 0) := "00000010";
 constant FIVE   :std_logic_vector(7 downto 0) := "00000101";
@@ -163,7 +163,7 @@ dut: eight_bit_sub_adder
       reset => reset,
       switch_i => switch_i,
       btn_i => btn_i,
-      sum_o => sum_o,
+      led_o => led_o,
       bcd_hun_o => bcd_hun_o,
       bcd_ten_o => bcd_ten_o,
       bcd_one_o => bcd_one_o

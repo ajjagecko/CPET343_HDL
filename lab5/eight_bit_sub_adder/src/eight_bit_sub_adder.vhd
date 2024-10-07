@@ -10,7 +10,7 @@ entity eight_bit_sub_adder is
       reset     :in std_logic;
       switch_i  :in std_logic_vector(7 downto 0);
       btn_i     :in std_logic;
-      sum_o     :out std_logic_vector(11 downto 0);
+      led_o     :out std_logic_vector(3 downto 0);
       bcd_hun_o :out std_logic_vector(6 downto 0);
       bcd_ten_o :out std_logic_vector(6 downto 0);
       bcd_one_o :out std_logic_vector(6 downto 0)
@@ -46,7 +46,6 @@ component double_dabble is
 end component; 
 
 begin
-   sum_o <= display_sel_s;
    -- Synchronizer for switch_i
    dut00: generic_sync_arch
       generic map (
@@ -82,6 +81,7 @@ begin
          case state_pres_s is
          
             when st_input_a =>
+               led_o <= "1110";
                if (btn_sync_s = '1') then
                   state_next_s <= st_input_b;
                else
@@ -89,6 +89,7 @@ begin
                end if;
                
             when st_input_b =>
+               led_o <= "1101";
                if (btn_sync_s = '1') then
                   state_next_s <= st_disp_sum;
                else
@@ -96,6 +97,7 @@ begin
                end if;
                
             when st_disp_sum =>
+               led_o <= "1011";
                if (btn_sync_s = '1') then
                   state_next_s <= st_disp_diff;
                else
@@ -103,6 +105,7 @@ begin
                end if;
                
             when st_disp_diff =>
+               led_o <= "0111";
                if (btn_sync_s = '1') then
                   state_next_s <= st_input_a;
                else
