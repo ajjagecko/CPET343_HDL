@@ -31,10 +31,19 @@ signal b_in_s        :std_logic_vector(7 downto 0);
 signal sub_en_s      :std_logic;
 signal sum_s         :std_logic_vector(7 downto 0);
 
-signal display_sel_s   :std_logic_vector(7 downto 0);
+signal display_sel_s   :std_logic_vector(11 downto 0);
 signal dd_hun_s      :std_logic_vector(3 downto 0);
 signal dd_ten_s      :std_logic_vector(3 downto 0);
 signal dd_one_s      :std_logic_vector(3 downto 0);
+
+component double_dabble is
+  port (
+    result_padded           : in  std_logic_vector(11 downto 0); 
+    ones                    : out std_logic_vector(3 downto 0);
+    tens                    : out std_logic_vector(3 downto 0);
+    hundreds                : out std_logic_vector(3 downto 0)
+  );  
+end component; 
 
 begin
    -- Synchronizer for switch_i
@@ -104,14 +113,12 @@ begin
                
          end case;
       end process;
-         
-   -- Add STATE MACHINE AND DEMUX HERE
    
    dut04: process(state_pres_s)
       begin
          case state_pres_s is
             when st_disp_diff => sub_en_s <= '1';
-            when others => sub_en_s <= '0';
+            when others       => sub_en_s <= '0';
          end case;
       end process;
       
@@ -119,7 +126,7 @@ begin
       begin
          case state_pres_s is
             when st_input_a => a_in_s <= switch_sync_s;
-            when others => a_in_s <= a_in_s;
+            when others     => a_in_s <= a_in_s;
          end case;
       end process;
       
@@ -127,18 +134,18 @@ begin
       begin
          case state_pres_s is
             when st_input_b => b_in_s <= switch_sync_s;
-            when others => b_in_s <= b_in_s;
+            when others     => b_in_s <= b_in_s;
          end case;
       end process;
    
    dut07: process(state_pres_s)
       begin
          case state_pres_s is
-            when st_input_a => display_sel_s <= a_in_s;
-            when st_input_b => display_sel_s <= b_in_s;
-            when st_disp_sum => display_sel_s <= sum_s;
-            when st_disp_diff => display_sel_s <= sum_s;
-            when others => display_sel_s <= display_sel_s;
+            when st_input_a   => display_sel_s <= "0000" & a_in_s;
+            when st_input_b   => display_sel_s <= "0000" & b_in_s;
+            when st_disp_sum  => display_sel_s <= "0000" & sum_s;
+            when st_disp_diff => display_sel_s <= "0000" & sum_s;
+            when others       => display_sel_s <= display_sel_s;
          end case;
       end process;
    
@@ -155,19 +162,27 @@ begin
          carry_o  => open
       );
       
-   dut09: bcd_4bit
+   dut09: double_dabble
+      port map (
+         result_padded => display_sel_s,
+         ones          => dd_one_s,
+         tens          => dd_ten_s,
+         hundreds      => dd_hun_s
+      );
+      
+   dut10: bcd_4bit
       port map (
          bcd_i   =>   dd_hun_s,
          bcd_o   =>   bcd_hun_o
       );
    
-   dut10: bcd_4bit
+   dut11: bcd_4bit
       port map (
          bcd_i   =>   dd_ten_s,
          bcd_o   =>   bcd_ten_o
       );
       
-   dut11: bcd_4bit
+   dut12: bcd_4bit
       port map (
          bcd_i   =>   dd_one_s,
          bcd_o   =>   bcd_one_o

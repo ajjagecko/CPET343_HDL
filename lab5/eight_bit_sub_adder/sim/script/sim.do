@@ -10,6 +10,7 @@ vcom -93 -work work ../../src/package_lib/generic_adder_arch/generic_adder_arch.
 vcom -93 -work work ../../src/package_lib/generic_adder_arch/full_adder_single_bit_arch.vhd
 
 vcom -93 -work work ../../src/eight_bit_sub_adder.vhd
+vcom -93 -work work ../../src/double_dabble.vhd
 vcom -93 -work work ../src/eight_bit_sub_adder_tb.vhd
 vsim -voptargs=+acc -msgmode both eight_bit_sub_adder_tb
 do wave.do
