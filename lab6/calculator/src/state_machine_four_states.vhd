@@ -7,8 +7,8 @@
 -------------------------------------------------------------------------------
 
 library ieee;
-use ieee.std_logic_1164.all
-use ieee.numeric_std.all
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 entity state_machine_four_states is
    port (
@@ -21,24 +21,18 @@ end entity state_machine_four_states;
 
 architecture beh of state_machine_four_states is
 
-signal execute_state :std_logic_vector(3 downto 0) := "1000";
-signal ms_state      :std_logic_vector(3 downto 0) := "0100";
-signal mr_state      :std_logic_vector(3 downto 0) := "0010";
-signal reset_state   :std_logic_vector(3 downto 0) := "0001";
+constant execute_state :std_logic_vector(3 downto 0) := "1000";
+constant ms_state      :std_logic_vector(3 downto 0) := "0100";
+constant mr_state      :std_logic_vector(3 downto 0) := "0010";
+constant reset_state   :std_logic_vector(3 downto 0) := "0001";
 
-signal state_next_s  :std_logic_vector(3 downto 0);
+signal state_next_s, state_pres_s  :std_logic_vector(3 downto 0);
 
 begin
 
-   state_creation: for i in 0 to states-1 generate
-      zeros(i) := '1';
-      encode(i) := zeros;
-      zeros(i) := '0';
-   end generate;
-   
    state_reset:process(clk,reset) is
       begin
-         state_pres_o <= state_pres;            --Avoiding latch
+         state_pres_s <= state_pres_s;            --Avoiding latch
          if(reset = '1') then
             state_pres_s <= reset_state;        --ALWAYS USES encode(0) FOR RESET
          elsif(clk'event and clk = '1') then
@@ -46,9 +40,9 @@ begin
          end if;
       end process;
    
-   next_state_logic: process(state_pres_s, btn_sync_s)
+   next_state_logic: process(state_pres_s, nsl_i)
       begin
-         case state_pres_s 
+         case state_pres_s is
          
             when reset_state =>
                case nsl_i is
@@ -82,7 +76,7 @@ begin
                      state_next_s <= ms_state;
                end case;
                
-            when execute =>
+            when execute_state =>
                case nsl_i is
                   when "001" =>
                      state_next_s <= mr_state;
@@ -97,4 +91,7 @@ begin
                
          end case;
       end process;
+      
+      state_pres_o <= state_pres_s;
+      
 end architecture;
