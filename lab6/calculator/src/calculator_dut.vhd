@@ -49,6 +49,9 @@ entity calculator_dut is
       led_o       :out std_logic_vector(3 downto 0);
       bcd_hun_o :out std_logic_vector(6 downto 0);
       bcd_ten_o :out std_logic_vector(6 downto 0);
+      flag_o    :out std_logic;
+      state_pres_o  :out std_logic_vector(3 downto 0);
+      state_next_o  :out std_logic_vector(3 downto 0);
       bcd_one_o :out std_logic_vector(6 downto 0)
    );
 end calculator_dut;
@@ -62,12 +65,14 @@ signal op_sel_s      : std_logic_vector(1 downto 0);
 signal switch_s      : std_logic_vector(7 downto 0);
 
 -- Internal Memory Signals
-signal alu_out_s     : std_logic_vector(7 downto 0);
-signal memory_in_s   : std_logic_vector(7 downto 0);
-signal memory_out_s  : std_logic_vector(7 downto 0);
+signal alu_out_s            : std_logic_vector(7 downto 0);
+signal memory_in_s          : std_logic_vector(7 downto 0);
+signal memory_out_s         : std_logic_vector(7 downto 0);
+signal memory_out_padded_s  : std_logic_vector(11 downto 0);
 
 signal addr_s        : std_logic_vector(1 downto 0);
 signal write_en_s    : std_logic;
+signal flag_s        : std_logic := '0';
 
 -- Internal Memory Addr Constants
 constant WORK_ADDR   : std_logic_vector(1 downto 0) := "00";
@@ -80,6 +85,11 @@ signal dd_one_s      : std_logic_vector(3 downto 0);
 
 -- Present State 
 signal state_pres_s  : std_logic_vector(3 downto 0);
+signal state_next_s  : std_logic_vector(3 downto 0);
+constant execute_state :std_logic_vector(3 downto 0) := "1000";
+constant ms_state      :std_logic_vector(3 downto 0) := "0100";
+constant mr_state      :std_logic_vector(3 downto 0) := "0010";
+constant reset_state   :std_logic_vector(3 downto 0) := "0001";
 
 -- State Machine Component
 component state_machine_four_states is
@@ -87,7 +97,9 @@ component state_machine_four_states is
       clk             :in  std_logic;
       reset           :in  std_logic;
       nsl_i           :in  std_logic_vector(2 downto 0);
-      state_pres_o    :out std_logic_vector(3 downto 0)
+      state_pres_o    :out std_logic_vector(3 downto 0);
+      state_next_o    :out std_logic_vector(3 downto 0)
+      
    );
 end component;
 
@@ -116,6 +128,11 @@ component generic_memory is
 end component;
 
 begin
+   flag_o <= flag_s;
+   state_pres_o <= state_pres_s;
+   state_next_o <= state_next_s;
+   
+   
    -- Synchronizer for Switch Input
    dut00: generic_sync_arch
       generic map (
@@ -170,7 +187,8 @@ begin
          clk   => clk,
          reset => reset,
          nsl_i => nsl_s,
-         state_pres_o => state_pres_s
+         state_pres_o => state_pres_s,
+         state_next_o => state_next_s
       );
       
    led_o <= state_pres_s;
@@ -187,7 +205,116 @@ begin
          data_i     => memory_in_s,
          data_o     => memory_out_s
       );
+   -- Write Enable Decision Logic
+   dut07: process(state_pres_s)
+      begin
+         write_en_s <= write_en_s;
+         case state_pres_s is
+         
+            when execute_state => 
+               if write_en_s = '0' then
+                  write_en_s <= '1';
+               else
+                  write_en_s <= '0';
+               end if;
+               
+            when mr_state => 
+               if (write_en_s = '0') and (flag_s = '1') then
+                  write_en_s <= '1';
+                  flag_s     <= '0';
+               else
+                  write_en_s <= '0';
+               end if;
+               
+            when ms_state => 
+               if (write_en_s = '0') and (flag_s = '1') then
+                  write_en_s <= '1';
+                  flag_s     <= '0';
+               else
+                  write_en_s <= '0';
+               end if;
+            when others =>
+               write_en_s <= write_en_s;
+         end case;
+      end process;
    
-
+   -- Address Decision Logic
+   dut08: process(state_pres_s, state_next_s)
+      begin
+         addr_s <= addr_s;
+         case state_pres_s is
+         
+            when reset_state => 
+                  addr_s <= WORK_ADDR;
+                  
+            when execute_state => 
+                  addr_s <= WORK_ADDR;
+               
+            when mr_state => 
+               if (state_pres_s /= state_next_s) then
+                  addr_s <= SAVE_ADDR;
+                  flag_s <= '1';
+               else
+                  addr_s <= WORK_ADDR;
+               end if;
+               
+            when ms_state => 
+               if (state_pres_s /= state_next_s) then
+                  addr_s <= WORK_ADDR;
+                  flag_s <= '1';
+               else
+                  addr_s <= SAVE_ADDR;
+               end if;
+            when others =>
+               addr_s <= addr_s;
+         end case;
+      end process;
+   
+   dut09: process(state_pres_s)
+      begin
+         memory_in_s <= memory_in_s;
+         case state_pres_s is
+            when execute_state => 
+               memory_in_s <= alu_out_s;
+            when mr_state =>
+               if (state_pres_s = state_next_s) then
+                  memory_in_s <= memory_out_s;
+               end if;
+            when ms_state =>
+               if (state_pres_s = state_next_s) then
+                  memory_in_s <= memory_out_s;
+               end if;
+            when others =>
+               memory_in_s <= memory_in_s;
+         end case;
+      end process;
+   
+   memory_out_padded_s <= "0000" & memory_out_s;
+   
+   dut10: double_dabble
+      port map (
+         result_padded => memory_out_padded_s,
+         ones          => dd_one_s,
+         tens          => dd_ten_s,
+         hundreds      => dd_hun_s
+      );
+      
+   dut11: bcd_4bit
+      port map (
+         bcd_i   =>   dd_hun_s,
+         bcd_o   =>   bcd_hun_o
+      );
+   
+   dut12: bcd_4bit
+      port map (
+         bcd_i   =>   dd_ten_s,
+         bcd_o   =>   bcd_ten_o
+      );
+      
+   dut13: bcd_4bit
+      port map (
+         bcd_i   =>   dd_one_s,
+         bcd_o   =>   bcd_one_o
+      );
 end architecture;
    

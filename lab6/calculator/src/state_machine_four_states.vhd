@@ -15,7 +15,8 @@ entity state_machine_four_states is
       clk             :in  std_logic;
       reset           :in  std_logic;
       nsl_i           :in  std_logic_vector(2 downto 0);
-      state_pres_o    :out std_logic_vector(3 downto 0)
+      state_pres_o    :out std_logic_vector(3 downto 0);
+      state_next_o    :out std_logic_vector(3 downto 0)
    );
 end entity state_machine_four_states;
 
@@ -93,5 +94,6 @@ begin
       end process;
       
       state_pres_o <= state_pres_s;
+      state_next_o <= state_next_s;
       
 end architecture;
