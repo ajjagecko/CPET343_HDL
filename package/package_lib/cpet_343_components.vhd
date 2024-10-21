@@ -76,4 +76,15 @@ package cpet_343_components is
          sync_o            : out std_logic_vector(bits-1 downto 0)
       );
    end component;
+   
+   component double_dabble is
+      port (
+         result_padded           : in  std_logic_vector(11 downto 0); 
+         ones                    : out std_logic_vector(3 downto 0);
+         tens                    : out std_logic_vector(3 downto 0);
+         hundreds                : out std_logic_vector(3 downto 0)
+   );  
+   
+   
+end component; 
 end package cpet_343_components;
