@@ -5,6 +5,7 @@ vcom -93 -work work ../../src/package_lib/rising_edge_synchronizer.vhd
 vcom -93 -work work ../../src/package_lib/generic_sync_arch.vhd
 vcom -93 -work work ../../src/package_lib/synchronizer.vhd
 vcom -93 -work work ../../src/package_lib/double_dabble.vhd
+vcom -93 -work work ../../src/generic_memory.vhd
 
 vcom -93 -work work ../../src/alu.vhd
 vcom -93 -work work ../../src/state_machine_four_states.vhd

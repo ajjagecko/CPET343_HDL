@@ -23,15 +23,19 @@ component calculator_dut is
       led_o       :out std_logic_vector(3 downto 0);
       bcd_hun_o :out std_logic_vector(6 downto 0);
       bcd_ten_o :out std_logic_vector(6 downto 0);
-      flag_o    :out std_logic;
+      addr_o        :out std_logic_vector(1 downto 0);
+      write_en_o    :out std_logic;
+      memory_in_o   :out std_logic_vector(7 downto 0);
       state_pres_o  :out std_logic_vector(3 downto 0);
       state_next_o  :out std_logic_vector(3 downto 0);
+      memory_out_o         :out std_logic_vector(7 downto 0);
+      memory_out_padded_o  :out std_logic_vector(11 downto 0);
       bcd_one_o :out std_logic_vector(6 downto 0)
    );
 end component;
 
 constant period   : time := 10ns;                                              
-signal clk        : std_logic;
+signal clk        : std_logic := '0';
 signal reset      : std_logic := '1';
 signal mr_i       : std_logic := '0';
 signal ms_i       : std_logic := '0';
@@ -41,10 +45,14 @@ signal switch_i   : std_logic_vector(7 downto 0);
 signal led_o      : std_logic_vector(3 downto 0) := "0000";
 signal bcd_hun_o  : std_logic_vector(6 downto 0);
 signal bcd_ten_o  : std_logic_vector(6 downto 0);
-signal      flag_o        : std_logic;
 signal      state_pres_o  : std_logic_vector(3 downto 0);
 signal      state_next_o  : std_logic_vector(3 downto 0);
 signal bcd_one_o  : std_logic_vector(6 downto 0);
+signal addr_s        : std_logic_vector(1 downto 0);
+signal write_en_s    : std_logic;
+signal memory_in_s          : std_logic_vector(7 downto 0);
+signal memory_out_o         : std_logic_vector(7 downto 0);
+signal memory_out_padded_o  : std_logic_vector(11 downto 0);
 
 begin
 
@@ -60,12 +68,12 @@ sequential_tb : process
       ms_i <= '1';
       wait for 10ns;
       ms_i <= '0';
-      wait for 30ns;
+      wait for 70ns;
       switch_i <= "01010101";
       exe_i    <= '1';
       wait for 10ns;
       exe_i <= '0';
-      wait for 30ns;
+      wait for 70ns;
       mr_i <= '1';
       wait for 40ns;
       report "****************** sequential testbench stop ****************";
@@ -100,9 +108,13 @@ dut: calculator_dut
       led_o     => led_o    ,
       bcd_hun_o => bcd_hun_o,
       bcd_ten_o => bcd_ten_o,
-      flag_o    => flag_o,
+      addr_o       => addr_s,
+      write_en_o   => write_en_s,
+      memory_in_o  => memory_in_s,
       state_pres_o => state_pres_o,
       state_next_o => state_next_o,
+      memory_out_o        => memory_out_o,
+      memory_out_padded_o => memory_out_padded_o,
       bcd_one_o => bcd_one_o
    );
 
