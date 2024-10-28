@@ -252,16 +252,35 @@ begin
                   end if;
                end if;
             when execute_state =>
+                  if(state_next_s /= state_pres_s) then
+                     flag_s <= '1';
+                  end if;
+                  
                   addr_s <= WORK_ADDR;
                   write_en_s <= '1';
-                  memory_in_s <= switch_s;
+                  
+                  if(flag_s = '1') then
+                     memory_in_s <= alu_out_s;
+                     flag_s <= '0';
+                  end if;
+                  
             when others =>
                   addr_s <= WORK_ADDR;
                   write_en_s <= '0';
                   memory_in_s <= memory_in_s;
          end case;
       end process;
-      
+   
+   dut08: alu
+      port map (
+         clk    => clk,
+         reset  => reset,
+         a      => memory_out_s,
+         b      => switch_s,
+         op     => op_sel_s,
+         result => alu_out_s
+      );
+   
    memory_out_padded_s <= "0000" & memory_out_s;
    
    dut10: double_dabble

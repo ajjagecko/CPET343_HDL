@@ -59,23 +59,65 @@ begin
 sequential_tb : process 
     begin
       report "****************** sequential testbench start ****************";
-      wait for 100ns;
-      switch_i <= "10101010";
+      -- Reset
+      wait for 80ns;
+      
+      -- Addition 1
+      switch_i <= "00000100";
+      op_sel_i <= "00";
+      wait for 20ns;
       exe_i    <= '1';
       wait for 10ns;
-      exe_i <= '0';
-      wait for 30ns;
+      exe_i    <= '0';
+      wait for 50ns;
+      
+      -- Multiply 1
+      switch_i <= "00001000";
+      op_sel_i <= "10";
+      wait for 20ns;
+      exe_i    <= '1';
+      wait for 10ns;
+      exe_i    <= '0';
+      wait for 50ns;
+      
+      -- Save 1
       ms_i <= '1';
       wait for 10ns;
       ms_i <= '0';
       wait for 70ns;
-      switch_i <= "01010101";
+      
+      --Subtract 1
+      switch_i <= "00001000";
+      op_sel_i <= "01";
+      wait for 20ns;
       exe_i    <= '1';
       wait for 10ns;
-      exe_i <= '0';
-      wait for 70ns;
+      exe_i    <= '0';
+      wait for 50ns;
+      
+      -- Divide 1
+      switch_i <= "00000010";
+      op_sel_i <= "11";
+      wait for 20ns;
+      exe_i    <= '1';
+      wait for 10ns;
+      exe_i    <= '0';
+      wait for 50ns;
+      
+      -- Load 1
       mr_i <= '1';
-      wait for 40ns;
+      wait for 10ns;
+      mr_i <= '0';
+      wait for 70ns;
+      
+      -- Divide 2
+      switch_i <= "00000010";
+      op_sel_i <= "11";
+      wait for 20ns;
+      exe_i    <= '1';
+      wait for 10ns;
+      exe_i    <= '0';
+      wait for 50ns;      
       report "****************** sequential testbench stop ****************";
       wait;
   end process; 
