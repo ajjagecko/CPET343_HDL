@@ -49,14 +49,6 @@ entity calculator_dut is
       led_o       :out std_logic_vector(3 downto 0);
       bcd_hun_o :out std_logic_vector(6 downto 0);
       bcd_ten_o :out std_logic_vector(6 downto 0);
-      addr_o        :out std_logic_vector(1 downto 0);
-      write_en_o    :out std_logic;
-      memory_in_o   :out std_logic_vector(7 downto 0);
-      state_pres_o  :out std_logic_vector(3 downto 0);
-      state_next_o  :out std_logic_vector(3 downto 0);
-      memory_out_o         :out std_logic_vector(7 downto 0);
-      memory_out_padded_o  :out std_logic_vector(11 downto 0);
-      
       bcd_one_o :out std_logic_vector(6 downto 0)
    );
 end calculator_dut;
@@ -133,15 +125,6 @@ component generic_memory is
 end component;
 
 begin
-   state_pres_o <= state_pres_s;
-   state_next_o <= state_next_s;
-   addr_o       <= addr_s;
-   memory_in_o  <= memory_in_s;
-   write_en_o   <= write_en_s ;
-   memory_out_o        <= memory_out_s;
-   memory_out_padded_o <= memory_out_padded_s;
-   
-   
    -- Synchronizer for Switch Input
    dut00: generic_sync_arch
       generic map (

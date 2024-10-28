@@ -26,15 +26,6 @@ add wave -noupdate /calculator_tb/dut/switch_i
 add wave -noupdate /calculator_tb/dut/exe_i
 add wave -noupdate /calculator_tb/dut/ms_i
 add wave -noupdate /calculator_tb/dut/mr_i
-add wave -noupdate /calculator_tb/dut/state_next_o
-add wave -noupdate /calculator_tb/dut/state_pres_o
-
-add wave -noupdate /calculator_tb/dut/addr_s
-add wave -noupdate /calculator_tb/dut/write_en_s
-
-add wave -noupdate /calculator_tb/dut/memory_in_s
-add wave -noupdate /calculator_tb/dut/memory_out_o
-add wave -noupdate /calculator_tb/dut/memory_out_padded_o
 
 add wave -noupdate /calculator_tb/dut/led_o
 add wave -noupdate -radix States /calculator_tb/dut/bcd_hun_o
