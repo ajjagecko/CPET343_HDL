@@ -71,6 +71,8 @@ signal addr_s        : std_logic_vector(1 downto 0);
 signal write_en_s    : std_logic := '0';
 signal flag_s        :std_logic  :='0';
 
+signal reset_s        :std_logic;
+
 -- Internal Memory Addr Constants
 constant WORK_ADDR   : std_logic_vector(1 downto 0) := "00";
 constant SAVE_ADDR   : std_logic_vector(1 downto 0) := "01";
@@ -125,6 +127,7 @@ component generic_memory is
 end component;
 
 begin
+   reset_s <= not reset;
    -- Synchronizer for Switch Input
    dut00: generic_sync_arch
       generic map (
@@ -132,7 +135,7 @@ begin
       )
       port map (
          clk     => clk,
-         reset   => reset,
+         reset   => reset_s,
          async_i => switch_i,
          sync_o  => switch_s
       );
@@ -143,7 +146,7 @@ begin
       )
       port map (
          clk     => clk,
-         reset   => reset,
+         reset   => reset_s,
          async_i => op_sel_i,
          sync_o  => op_sel_s
       );
@@ -152,7 +155,7 @@ begin
    dut02: rising_edge_synchronizer
       port map (
          clk   => clk,
-         reset => reset,
+         reset => reset_s,
          input => exe_i,
          edge  => nsl_s(2)
       );
@@ -160,7 +163,7 @@ begin
    dut03: rising_edge_synchronizer
       port map (
          clk   => clk,
-         reset => reset,
+         reset => reset_s,
          input => ms_i,
          edge  => nsl_s(1)
       );
@@ -168,7 +171,7 @@ begin
    dut04: rising_edge_synchronizer
       port map (
          clk   => clk,
-         reset => reset,
+         reset => reset_s,
          input => mr_i,
          edge  => nsl_s(0)
       );
@@ -177,7 +180,7 @@ begin
    dut05: state_machine_four_states
       port map (
          clk   => clk,
-         reset => reset,
+         reset => reset_s,
          nsl_i => nsl_s,
          state_pres_o => state_pres_s,
          state_next_o => state_next_s
@@ -235,7 +238,7 @@ begin
                   end if;
                end if;
             when execute_state =>
-                  if(state_next_s /= state_pres_s) then
+                  if(state_next_s /= state_pres_s) or (nsl_s = "100") then
                      flag_s <= '1';
                   end if;
                   
@@ -257,7 +260,7 @@ begin
    dut08: alu
       port map (
          clk    => clk,
-         reset  => reset,
+         reset  => reset_s,
          a      => memory_out_s,
          b      => switch_s,
          op     => op_sel_s,

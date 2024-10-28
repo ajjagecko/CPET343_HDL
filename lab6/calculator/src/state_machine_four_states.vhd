@@ -29,6 +29,7 @@ constant reset_state   :std_logic_vector(3 downto 0) := "0001";
 
 signal state_next_s, state_pres_s  :std_logic_vector(3 downto 0);
 signal state_timer_s               :integer := 0;
+--constant timer_max                 :integer := 4;
 
 begin
 
@@ -59,57 +60,60 @@ begin
                end case;
                   
             when mr_state =>
-               if (state_pres_s /= state_next_s) then
-                  state_timer_s <= 0;
-               end if;
+   --            if (state_pres_s /= state_next_s) then
+   --               state_timer_s <= 0;
+   --            end if;
                case nsl_i is
                   when "010" =>
                      state_next_s <= ms_state;
                   when "100" => 
                      state_next_s <= execute_state;
                   when others =>
-                     if (state_timer_s = 4) then
-                        state_next_s <= reset_state;
-                     else
-                        state_timer_s <= state_timer_s + 1;
-                        state_next_s <= mr_state;
-                     end if;
+                  --   if (state_timer_s >= timer_max) then
+                  --      state_next_s <= reset_state;
+                  --   else
+                  --      state_timer_s <= state_timer_s + 1;
+                  --      state_next_s <= mr_state;
+                  --   end if;
+                     state_next_s <= mr_state;
                end case;
                
             when ms_state =>
-               if (state_pres_s /= state_next_s) then
-                  state_timer_s <= 0;
-               end if;
+            --   if (state_pres_s /= state_next_s) then
+            --      state_timer_s <= 0;
+            --   end if;
                case nsl_i is
                   when "001" =>
                      state_next_s <= mr_state;
                   when "100" =>
                      state_next_s <= execute_state;
                   when others =>
-                     if (state_timer_s = 4) then
-                        state_next_s <= reset_state;
-                     else
-                        state_timer_s <= state_timer_s + 1;
-                        state_next_s <= ms_state;
-                     end if;
+               --      if (state_timer_s >= timer_max) then
+               --         state_next_s <= reset_state;
+               --     else
+               --        state_timer_s <= state_timer_s + 1;
+               --        state_next_s <= ms_state;
+               --     end if;
+                     state_next_s <= ms_state;
                end case;
                
             when execute_state =>
-               if (state_pres_s /= state_next_s) then
-                  state_timer_s <= 0;
-               end if;
+            --  if (state_pres_s /= state_next_s) then
+            --     state_timer_s <= 0;
+            --  end if;
                case nsl_i is
                   when "001" =>
                      state_next_s <= mr_state;
                   when "010" =>
                      state_next_s <= ms_state;
                   when others =>
-                     if (state_timer_s = 4) then
-                        state_next_s <= reset_state;
-                     else
-                        state_timer_s <= state_timer_s + 1;
-                        state_next_s <= execute_state;
-                     end if;
+               --      if (state_timer_s >= timer_max) then
+               --         state_next_s <= reset_state;
+               --      else
+               --         state_timer_s <= state_timer_s + 1;
+               --         state_next_s <= execute_state;
+               --      end if;
+                     state_next_s <= execute_state;
                end case;
                
             when others =>

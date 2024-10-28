@@ -29,7 +29,7 @@ end component;
 
 constant period   : time := 10ns;                                              
 signal clk        : std_logic := '0';
-signal reset      : std_logic := '1';
+signal reset      : std_logic := '0';
 signal mr_i       : std_logic := '0';
 signal ms_i       : std_logic := '0';
 signal exe_i      : std_logic := '0';
@@ -126,7 +126,7 @@ end process;
 async_reset: process
   begin
     wait for 2 * period;
-    reset <= '0';
+    reset <= '1';
     wait;
 end process;
 

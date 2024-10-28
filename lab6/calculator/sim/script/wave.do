@@ -23,6 +23,7 @@ add wave -noupdate /calculator_tb/dut/clk
 add wave -noupdate /calculator_tb/dut/reset
 
 add wave -noupdate /calculator_tb/dut/switch_i
+add wave -noupdate /calculator_tb/dut/op_sel_i
 add wave -noupdate /calculator_tb/dut/exe_i
 add wave -noupdate /calculator_tb/dut/ms_i
 add wave -noupdate /calculator_tb/dut/mr_i
