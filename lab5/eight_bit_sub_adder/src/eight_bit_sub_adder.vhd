@@ -113,7 +113,7 @@ begin
                end if;
                
             when others =>
-               state_next_s <= state_pres_s;
+               state_next_s <= state_pres_s; --NEXT TIME: MOVE THIS OUT OF when others AND ADD IT ABOVE CASE STATEMENT TO AVOID LATCHES!!!!!
                
          end case;
       end process;

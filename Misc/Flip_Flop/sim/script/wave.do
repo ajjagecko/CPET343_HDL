@@ -1,6 +1,5 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
-add wave -noupdate -expand -group {New Group} -color Yellow -itemcolor Maroon /tri_state_buffer_tb/uut/clk_i
 add wave -noupdate -expand -group {New Group} -color Yellow -itemcolor Maroon /tri_state_buffer_tb/uut/value_i
 add wave -noupdate -expand -group {New Group} -color Yellow -itemcolor Maroon /tri_state_buffer_tb/uut/enable_i
 add wave -noupdate -expand -group {New Group} -color Yellow -itemcolor Maroon /tri_state_buffer_tb/uut/value_o

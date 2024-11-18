@@ -19,19 +19,15 @@ radix define States {
     -default default
 }
 quietly WaveActivateNextPane {} 0
-add wave -noupdate /calculator_tb/dut/clk
-add wave -noupdate /calculator_tb/dut/reset
+add wave -noupdate /blink_block_mem_tb/clk
+add wave -noupdate /blink_block_mem_tb/reset
+add wave -noupdate /blink_block_mem_tb/exe_btn_i
 
-add wave -noupdate /calculator_tb/dut/switch_i
-add wave -noupdate /calculator_tb/dut/op_sel_i
-add wave -noupdate /calculator_tb/dut/exe_i
-add wave -noupdate /calculator_tb/dut/ms_i
-add wave -noupdate /calculator_tb/dut/mr_i
 
-add wave -noupdate /calculator_tb/dut/led_o
-add wave -noupdate -radix States /calculator_tb/dut/bcd_hun_o
-add wave -noupdate -radix States /calculator_tb/dut/bcd_ten_o
-add wave -noupdate -radix States /calculator_tb/dut/bcd_one_o
+add wave -noupdate /blink_block_mem_tb/dut/led_o
+add wave -noupdate -radix States /blink_block_mem_tb/bcd_hun_o
+add wave -noupdate -radix States /blink_block_mem_tb/bcd_ten_o
+add wave -noupdate -radix States /blink_block_mem_tb/bcd_one_o
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {50000 ps} 0}

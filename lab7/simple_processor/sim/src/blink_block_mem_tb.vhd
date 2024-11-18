@@ -10,22 +10,26 @@ end blink_block_mem_tb;
 
 architecture arch of blink_block_mem_tb is
 
-component blink_block_mem is
-  generic (
-    update_rate      : in  integer -- 50,000,000 = 1 sec
-  );
-  port (
-    clk              : in  std_logic; 
-    reset            : in  std_logic;
-    led_out          : out std_logic_vector(6 downto 0)
-  );
+component simple_processor is
+   port(
+      clk         :in std_logic;
+      reset       :in std_logic;
+      exe_btn_i   :in std_logic;
+      bcd_hun_o   :out std_logic_vector(6 downto 0);
+      bcd_ten_o   :out std_logic_vector(6 downto 0);
+      bcd_one_o   :out std_logic_vector(6 downto 0);
+      led_o       :out std_logic_vector(3 downto 0)
+   );
 end component; 
-
-signal led_out        : std_logic_vector(6 downto 0);
-constant period       : time := 20ns;                                              
+                                        
 signal clk            : std_logic := '0';
 signal reset          : std_logic := '1';
-constant UPDATE_RATE  : integer := 5;
+constant period   : time := 10ns;
+signal exe_btn_i      : std_logic := '0';
+signal led_o      : std_logic_vector(3 downto 0) := "0000";
+signal bcd_hun_o  : std_logic_vector(6 downto 0);
+signal bcd_ten_o  : std_logic_vector(6 downto 0);
+signal bcd_one_o  : std_logic_vector(6 downto 0);
 
 begin
 
@@ -44,13 +48,47 @@ async_reset: process
     wait;
 end process; 
 
-uut: blink_block_mem  
-  generic map (
-    update_rate   => UPDATE_RATE
-  )
-  port map(
-    clk           => clk,
-    reset         => reset,
-    led_out       => led_out
-  );
+uut: simple_processor
+   port map(
+      clk         => clk,
+      reset       => reset,
+      exe_btn_i   => exe_btn_i,
+      bcd_hun_o   => bcd_hun_o,
+      bcd_ten_o   => bcd_ten_o,
+      bcd_one_o   => bcd_one_o,
+      led_o       => led_o
+   );
+
+sequential_tb : process 
+    begin
+      report "****************** sequential testbench start ****************";
+      -- Reset
+      wait for 80ns;
+      exe_btn_i <= '1';
+      wait for 80ns;
+      exe_btn_i <= '0';
+      wait for 80ns;
+      exe_btn_i <= '1';
+      wait for 80ns;
+      exe_btn_i <= '0';
+      wait for 80ns;
+      exe_btn_i <= '1';
+      wait for 80ns;
+      exe_btn_i <= '0';      
+      wait for 80ns;
+      exe_btn_i <= '1';
+      wait for 80ns;
+      exe_btn_i <= '0';
+      wait for 80ns;
+      exe_btn_i <= '1';
+      wait for 80ns;
+      exe_btn_i <= '0';
+      wait for 80ns;
+      exe_btn_i <= '1';
+      wait for 80ns;
+      exe_btn_i <= '0';
+      
+end process;
+
+
 end arch;

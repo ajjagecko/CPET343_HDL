@@ -44,7 +44,8 @@ entity simple_processor_dut is
       exe_btn_i   :in std_logic;
       bcd_hun_o   :out std_logic_vector(6 downto 0);
       bcd_ten_o   :out std_logic_vector(6 downto 0);
-      bcd_one_o   :out std_logic_vector(6 downto 0)
+      bcd_one_o   :out std_logic_vector(6 downto 0);
+      led_o       :out std_logic_vector(3 downto 0)
    );
 end simple_processor_dut;
 
@@ -52,6 +53,9 @@ architecture beh of simple_processor_dut is
 
 -- Synchronized execution button
 signal exe_btn_s : std_logic;
+
+signal pc_s      : std_logic_vector(4 downto 0) := "00000";
+signal next_pc_s      : std_logic_vector(4 downto 0);
 
 -- Instruction set and mapping aliases
 signal instruct_set_s : std_logic_vector(12 downto 0);
@@ -78,20 +82,67 @@ component calculator_dut is
    );
 end component;
 
+component blink_rom
+  PORT(
+    address         : IN STD_LOGIC_VECTOR (4 DOWNTO 0);
+    clock           : IN STD_LOGIC  := '1';
+    q               : OUT STD_LOGIC_VECTOR (12 DOWNTO 0)
+  );
+end component;
+
 begin
    -- RES for Execute Button
    dut00: rising_edge_synchronizer
       port map (
          clk   => clk,
-         reset => reset_s,
+         reset => reset,
          input => exe_btn_i,
          edge  => exe_btn_s
       );
       
    -- Logic for determining PC
+   dut01 : process(exe_btn_s, pc_s)
+      begin
+         pc_s <= pc_s;
+         if exe_btn_s = '1' then
+            pc_s <= next_pc_s;
+         end if;
+      end process;
+   
+   dut04 : generic_adder_arch
+      generic map (
+         bits => 13
+      )
+      port map (
+         a     => pc_s,
+         b     => "0000000000001",
+         cin   => '0',
+         sum   => next_pc_s,
+         cout  => open
+      );
    
    -- Memory for Instruction Sets
+   dut02 : blink_rom 
+   port map (
+      address     => pc_s,
+      clock       => clk,
+      q           => instruct_set_s
+   );
    
    -- Calculator_Dut Initialization
-
+   dut03 : calculator_dut
+      port map(
+         clk       =>   clk,
+         reset     =>   reset,
+         mr_i      =>   mr_a,
+         ms_i      =>   ms_a,
+         exe_i     =>   exe_a,
+         op_sel_i  =>   opcode_a,
+         switch_i  =>   in_b_a,
+         led_o     =>   led_o,
+         bcd_hun_o =>   bcd_hun_o,
+         bcd_ten_o =>   bcd_ten_o,
+         bcd_one_o =>   bcd_one_o
+   );
+   
 end architecture;

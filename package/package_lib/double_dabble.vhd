@@ -1,4 +1,24 @@
-bcd1: process(result_padded)
+-------------------------------------------------------------------------------
+-- Dr. Kaputa
+-- double_dabble demo
+-------------------------------------------------------------------------------
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity double_dabble is
+  port (
+    result_padded           : in  std_logic_vector(11 downto 0); 
+    ones                    : out std_logic_vector(3 downto 0);
+    tens                    : out std_logic_vector(3 downto 0);
+    hundreds                : out std_logic_vector(3 downto 0)
+  );  
+end double_dabble;  
+
+architecture beh of double_dabble  is
+
+begin
+  bcd1: process(result_padded)
   -- temporary variable
   variable temp : STD_LOGIC_VECTOR (11 downto 0);
   
@@ -53,3 +73,4 @@ bcd1: process(result_padded)
     hundreds <= STD_LOGIC_VECTOR(bcd(11 downto 8));
     --thousands <= STD_LOGIC_VECTOR(bcd(15 downto 12));
   end process bcd1; 
+end beh;

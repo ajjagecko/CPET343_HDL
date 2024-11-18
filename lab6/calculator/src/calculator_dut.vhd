@@ -139,7 +139,8 @@ begin
          async_i => switch_i,
          sync_o  => switch_s
       );
-
+      
+   -- Sync Init
    dut01: generic_sync_arch
       generic map (
          bits => 2
@@ -159,7 +160,8 @@ begin
          input => exe_i,
          edge  => nsl_s(2)
       );
-
+      
+   -- RES init
    dut03: rising_edge_synchronizer
       port map (
          clk   => clk,
@@ -167,7 +169,8 @@ begin
          input => ms_i,
          edge  => nsl_s(1)
       );
-      
+   
+   -- RES init
    dut04: rising_edge_synchronizer
       port map (
          clk   => clk,
@@ -185,9 +188,11 @@ begin
          state_pres_o => state_pres_s,
          state_next_o => state_next_s
       );
-      
+   
+   -- state output to leds
    led_o <= state_pres_s;
    
+   -- memory init
    dut06: generic_memory
       generic map (
          addr_width_g  => 2,
@@ -200,22 +205,24 @@ begin
          din  => memory_in_s,
          dout => memory_out_s
       );
-      
+   
+   -- Logic for deciding Memory Inputs
    dut07: process(clk,state_next_s, state_pres_s)
       begin
          addr_s <= addr_s;
          write_en_s <= write_en_s;
          memory_in_s <= memory_in_s;
+         flag_s <= flag_s;
          case state_next_s is
             when reset_state =>
                   addr_s <= WORK_ADDR;
                   write_en_s <= '0';
                   memory_in_s <= memory_in_s;
             when mr_state =>
-               if(state_next_s /= state_pres_s) then
+               if(state_next_s /= state_pres_s) then   -- Checking for if it just entered state
                   addr_s <= SAVE_ADDR;
                   write_en_s <= '0';
-                  flag_s <= '1';
+                  flag_s <= '1';                       -- flag for next clock logic
                else
                   addr_s <= WORK_ADDR;
                   write_en_s <= '1';
@@ -225,10 +232,10 @@ begin
                   end if;
                end if;
             when ms_state =>
-               if(state_next_s /= state_pres_s) then
+               if(state_next_s /= state_pres_s) then   -- Checking for if it just entered state
                   addr_s <= WORK_ADDR;
                   write_en_s <= '0';
-                  flag_s <= '1';
+                  flag_s <= '1';                       -- flag for next clock logic
                else
                   addr_s <= SAVE_ADDR;
                   write_en_s <= '1';
@@ -238,7 +245,7 @@ begin
                   end if;
                end if;
             when execute_state =>
-                  if(state_next_s /= state_pres_s) or (nsl_s = "100") then
+                  if(state_next_s /= state_pres_s) or (nsl_s = "100") then -- Checking for if it just entered state OR if the button was recently pressed
                      flag_s <= '1';
                   end if;
                   
@@ -257,6 +264,7 @@ begin
          end case;
       end process;
    
+   -- AlU init
    dut08: alu
       port map (
          clk    => clk,
@@ -267,8 +275,10 @@ begin
          result => alu_out_s
       );
    
+   --Padding memory_out_s for double dapple
    memory_out_padded_s <= "0000" & memory_out_s;
    
+   --Double Dapple init
    dut10: double_dabble
       port map (
          result_padded => memory_out_padded_s,
@@ -276,19 +286,22 @@ begin
          tens          => dd_ten_s,
          hundreds      => dd_hun_s
       );
-      
+   
+   -- bcd init
    dut11: bcd_4bit
       port map (
          bcd_i   =>   dd_hun_s,
          bcd_o   =>   bcd_hun_o
       );
-   
+      
+   -- bcd init
    dut12: bcd_4bit
       port map (
          bcd_i   =>   dd_ten_s,
          bcd_o   =>   bcd_ten_o
       );
       
+   -- bcd init
    dut13: bcd_4bit
       port map (
          bcd_i   =>   dd_one_s,

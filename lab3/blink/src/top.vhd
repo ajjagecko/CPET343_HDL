@@ -17,7 +17,7 @@ architecture beh of top is
 
 component blink is
   generic (
-    max_count       : integer := 25000000
+    max_count       : integer := 2500000
   );
   port (
     clk             : in  std_logic; 
@@ -30,7 +30,7 @@ begin
 
 uut: blink  
   generic map (
-    max_count => 50000000
+    max_count => 5000
   )
   port map(
     clk       => clk,

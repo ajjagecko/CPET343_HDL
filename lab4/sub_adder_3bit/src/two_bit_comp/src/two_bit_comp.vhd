@@ -29,6 +29,7 @@ architecture beh of two_bit_comp is
    end component;
       
 begin
+   -- Inverting every bit in unsigned (Add proper generate option later)
    not_unsign_s <= NOT(unsign_i(3)) & NOT(unsign_i(2)) & NOT(unsign_i(1)) & NOT(unsign_i(0));
    
    uut0: generic_adder_arch

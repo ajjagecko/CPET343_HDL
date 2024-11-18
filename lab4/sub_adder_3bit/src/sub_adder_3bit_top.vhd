@@ -20,9 +20,9 @@ port (
    sub_btn_i  :in std_logic;
    a_bcd_o        :out std_logic_vector(6 downto 0);
    b_bcd_o        :out std_logic_vector(6 downto 0);
-   --sum_temp_o     :out std_logic_vector(3 downto 0);
-   --sub_sync_o     :out std_logic;
-   --add_sync_o     :out std_logic;
+   sum_temp_o     :out std_logic_vector(3 downto 0);
+   sub_sync_o     :out std_logic;
+   add_sync_o     :out std_logic;
    result_bcd_o   :out std_logic_vector(6 downto 0)
    );
 end sub_adder_3bit;
@@ -154,15 +154,18 @@ begin
    --Selection Logic for when to add or subtract, and which b to use
    uut2: process(sub_btn_sync_s, add_btn_sync_s, b_2bc_s, b_sync_s)
       begin
+         -- Reset (may not be needed here)
          if (reset = '1') then
             sub_enable_s <= '0';
          else
+            -- Logic for switching mode
             if(sub_btn_sync_s = '1') then
                sub_enable_s <= '1';
             elsif (add_btn_sync_s = '1') then
                sub_enable_s <= '0';
             end if;
          end if;
+         -- Case statement for implementing mode (Looking at it now it's redundant but doesn't affect functionality for this lab)
          case sub_enable_s is
             when '1' => b_add_in_s <= b_2bc_s;
             when others => b_add_in_s <= b_sync_s;
@@ -203,8 +206,8 @@ begin
          bcd_o => result_bcd_o
       );
    
-   --sum_temp_o <= sum_s;
-   --sub_sync_o <= not sub_btn_sync_s;
-   --add_sync_o <= not add_btn_sync_s;
+   sum_temp_o <= sum_s;
+   sub_sync_o <= sub_btn_sync_s;
+   add_sync_o <= add_btn_sync_s;
          
 end architecture;

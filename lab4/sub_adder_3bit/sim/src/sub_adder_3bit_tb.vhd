@@ -22,7 +22,9 @@ component sub_adder_3bit is
    a_bcd_o        :out std_logic_vector(6 downto 0);
    b_bcd_o        :out std_logic_vector(6 downto 0);
    
-    --sum_temp_o     :out std_logic_vector(3 downto 0);
+   sum_temp_o     :out std_logic_vector(3 downto 0);
+   sub_sync_o     :out std_logic;
+   add_sync_o     :out std_logic;
    
    result_bcd_o   :out std_logic_vector(6 downto 0)
   
@@ -41,8 +43,9 @@ signal b_bcd_o        :std_logic_vector(6 downto 0);
 signal result_bcd_o   :std_logic_vector(6 downto 0);
 
 signal sum_temp_o     :std_logic_vector(3 downto 0);
-signal a_edge_o   :std_logic;
-signal b_edge_o   :std_logic;
+signal sub_sync_o     :std_logic;
+signal add_sync_o     :std_logic;
+
 
 begin
 
@@ -93,7 +96,9 @@ uut: sub_adder_3bit
    sub_btn_i     => sub_btn_i,
    a_bcd_o       => a_bcd_o,
    b_bcd_o       => b_bcd_o,
-    --sum_temp_o    => sum_temp_o,
+   sum_temp_o    => sum_temp_o,
+   sub_sync_o    => sub_sync_o,
+   add_sync_o    => add_sync_o,
    result_bcd_o  => result_bcd_o
   );
 end arch;

@@ -35,9 +35,6 @@ add wave -noupdate /sub_adder_3bit_tb/uut/sub_sync_o
 add wave -noupdate /sub_adder_3bit_tb/uut/sum_temp_o
 add wave -noupdate -radix States /sub_adder_3bit_tb/uut/result_bcd_o
 
-add wave -noupdate /sub_adder_3bit_tb/uut/a_edge_o
-add wave -noupdate /sub_adder_3bit_tb/uut/b_edge_o
-
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {50000 ps} 0}
 quietly wave cursor active 1

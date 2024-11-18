@@ -5,4 +5,4 @@ vcom -93 -work work ../../src/alu_or.vhd
 vcom -93 -work work ../src/tri_state_buffer_tb.vhd
 vsim -voptargs=+acc tri_state_buffer_tb
 do wave.do
-run 100 ns
+run 200 ns

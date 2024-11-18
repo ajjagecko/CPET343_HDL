@@ -78,7 +78,7 @@ end generate concurrent_stimuli;
 
 math_check : process(sum) 
   begin
-    assert (unsigned(a) + unsigned(b) + unsigned(cin_guard & cin) = unsigned(sum))
+    assert (unsigned(a) + unsigned(b) + unsigned(cin_guard & cin) = unsigned(sum))  --TRY FIXING CGUARD LATER!!!
     report  "a:" & integer'image(to_integer(unsigned(a))) & " " & 
             "b:" & integer'image(to_integer(unsigned(b))) & " " &
             "sum:" & integer'image(to_integer(unsigned(sum)));

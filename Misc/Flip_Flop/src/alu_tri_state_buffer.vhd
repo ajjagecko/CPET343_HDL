@@ -14,7 +14,6 @@ use ieee.numeric_std.all;
 -- Defining Inputs and Outputs for Structural
 entity tri_state_buffer is
    port(
-      clk_i     :in std_logic;
       value_i   :in std_logic;
       enable_i  :in std_logic;
       value_o   :out std_logic
@@ -22,16 +21,16 @@ entity tri_state_buffer is
 end tri_state_buffer;
 
 architecture structural of tri_state_buffer is
-
+signal value_s :std_logic;
 begin
-   tri_state:process(enable_i, clk_i, value_i)
+   tri_state:process(enable_i, value_i)
    begin
-      if (clk_i'event and clk_i = '1') then
-         if (enable_i = '1') then 
+      if (enable_i'event and enable_i = '1') then
             value_o <= value_i;
-         else
-            value_o <= 'Z';
-         end if;
+      else
+            if (enable_i = '0') then
+            value_o <= '0';
+            end if;
       end if;
    end process;    
 end architecture;
