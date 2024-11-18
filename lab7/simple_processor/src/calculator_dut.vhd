@@ -127,57 +127,63 @@ component generic_memory is
 end component;
 
 begin
-   reset_s <= not reset;
-   -- Synchronizer for Switch Input
-   dut00: generic_sync_arch
-      generic map (
-         bits => 8
-      )
-      port map (
-         clk     => clk,
-         reset   => reset_s,
-         async_i => switch_i,
-         sync_o  => switch_s
-      );
+   reset_s <= reset;
+--   -- Synchronizer for Switch Input
+--   dut00: generic_sync_arch
+--      generic map (
+--         bits => 8
+--      )
+--      port map (
+--         clk     => clk,
+--         reset   => reset_s,
+--         async_i => switch_i,
+--         sync_o  => switch_s
+--      );
+--      
+--   -- Sync Init
+--   dut01: generic_sync_arch
+--      generic map (
+--         bits => 2
+--      )
+--      port map (
+--         clk     => clk,
+--         reset   => reset_s,
+--         async_i => op_sel_i,
+--         sync_o  => op_sel_s
+--      );
+--
+--   -- RES for all three button inputs for nsl_s (next state logic)
+--   dut02: rising_edge_synchronizer
+--      port map (
+--         clk   => clk,
+--         reset => reset_s,
+--         input => exe_i,
+--         edge  => nsl_s(2)
+--      );
+--      
+--   -- RES init
+--   dut03: rising_edge_synchronizer
+--      port map (
+--         clk   => clk,
+--         reset => reset_s,
+--         input => ms_i,
+--         edge  => nsl_s(1)
+--      );
+--   
+--   -- RES init
+--   dut04: rising_edge_synchronizer
+--      port map (
+--         clk   => clk,
+--         reset => reset_s,
+--         input => mr_i,
+--         edge  => nsl_s(0)
+--      );
       
-   -- Sync Init
-   dut01: generic_sync_arch
-      generic map (
-         bits => 2
-      )
-      port map (
-         clk     => clk,
-         reset   => reset_s,
-         async_i => op_sel_i,
-         sync_o  => op_sel_s
-      );
-
-   -- RES for all three button inputs for nsl_s (next state logic)
-   dut02: rising_edge_synchronizer
-      port map (
-         clk   => clk,
-         reset => reset_s,
-         input => exe_i,
-         edge  => nsl_s(2)
-      );
-      
-   -- RES init
-   dut03: rising_edge_synchronizer
-      port map (
-         clk   => clk,
-         reset => reset_s,
-         input => ms_i,
-         edge  => nsl_s(1)
-      );
-   
-   -- RES init
-   dut04: rising_edge_synchronizer
-      port map (
-         clk   => clk,
-         reset => reset_s,
-         input => mr_i,
-         edge  => nsl_s(0)
-      );
+   switch_s <= switch_i;
+   nsl_s(2) <= exe_i;
+   nsl_s(1) <= ms_i;
+   nsl_s(0) <= mr_i;
+   op_sel_s <= op_sel_i;
    
    -- State Machine
    dut05: state_machine_four_states

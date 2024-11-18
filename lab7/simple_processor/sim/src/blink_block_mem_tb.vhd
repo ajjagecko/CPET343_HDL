@@ -18,6 +18,8 @@ component simple_processor is
       bcd_hun_o   :out std_logic_vector(6 downto 0);
       bcd_ten_o   :out std_logic_vector(6 downto 0);
       bcd_one_o   :out std_logic_vector(6 downto 0);
+      pc_o      :out std_logic_vector(4 downto 0);
+      instruct_set_o :out std_logic_vector(12 downto 0);
       led_o       :out std_logic_vector(3 downto 0)
    );
 end component; 
@@ -30,6 +32,8 @@ signal led_o      : std_logic_vector(3 downto 0) := "0000";
 signal bcd_hun_o  : std_logic_vector(6 downto 0);
 signal bcd_ten_o  : std_logic_vector(6 downto 0);
 signal bcd_one_o  : std_logic_vector(6 downto 0);
+signal pc_o      :std_logic_vector(4 downto 0);
+signal instruct_set_o : std_logic_vector(12 downto 0);
 
 begin
 
@@ -56,6 +60,8 @@ uut: simple_processor
       bcd_hun_o   => bcd_hun_o,
       bcd_ten_o   => bcd_ten_o,
       bcd_one_o   => bcd_one_o,
+      pc_o        => pc_o,
+      instruct_set_o => instruct_set_o,
       led_o       => led_o
    );
 

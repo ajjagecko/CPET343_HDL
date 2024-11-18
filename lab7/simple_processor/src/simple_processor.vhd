@@ -37,7 +37,7 @@ use ieee.numeric_std.all;
 library work;
 use work.cpet_343_components.all;
 
-entity simple_processor_dut is
+entity simple_processor is
    port(
       clk         :in std_logic;
       reset       :in std_logic;
@@ -45,14 +45,17 @@ entity simple_processor_dut is
       bcd_hun_o   :out std_logic_vector(6 downto 0);
       bcd_ten_o   :out std_logic_vector(6 downto 0);
       bcd_one_o   :out std_logic_vector(6 downto 0);
+      pc_o      :out std_logic_vector(4 downto 0);
+      instruct_set_o :out std_logic_vector(12 downto 0);
       led_o       :out std_logic_vector(3 downto 0)
    );
-end simple_processor_dut;
+end simple_processor;
 
-architecture beh of simple_processor_dut is
+architecture beh of simple_processor is
 
 -- Synchronized execution button
 signal exe_btn_s : std_logic;
+signal reset_s : std_logic;
 
 signal pc_s      : std_logic_vector(4 downto 0) := "00000";
 signal next_pc_s      : std_logic_vector(4 downto 0);
@@ -91,11 +94,15 @@ component blink_rom
 end component;
 
 begin
+   reset_s <= reset;
+   pc_o <= pc_s;
+   instruct_set_o <= instruct_set_s;
+   
    -- RES for Execute Button
    dut00: rising_edge_synchronizer
       port map (
          clk   => clk,
-         reset => reset,
+         reset => reset_s,
          input => exe_btn_i,
          edge  => exe_btn_s
       );
@@ -111,11 +118,11 @@ begin
    
    dut04 : generic_adder_arch
       generic map (
-         bits => 13
+         bits => 5
       )
       port map (
          a     => pc_s,
-         b     => "0000000000001",
+         b     => "00001",
          cin   => '0',
          sum   => next_pc_s,
          cout  => open
@@ -133,7 +140,7 @@ begin
    dut03 : calculator_dut
       port map(
          clk       =>   clk,
-         reset     =>   reset,
+         reset     =>   reset_s,
          mr_i      =>   mr_a,
          ms_i      =>   ms_a,
          exe_i     =>   exe_a,

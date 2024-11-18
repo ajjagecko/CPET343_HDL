@@ -24,10 +24,25 @@ add wave -noupdate /blink_block_mem_tb/reset
 add wave -noupdate /blink_block_mem_tb/exe_btn_i
 
 
-add wave -noupdate /blink_block_mem_tb/dut/led_o
+add wave -noupdate /blink_block_mem_tb/led_o
+
+add wave -noupdate /blink_block_mem_tb/pc_o
+add wave -noupdate /blink_block_mem_tb/instruct_set_o
+add wave -noupdate /blink_block_mem_tb/uut/dut03/exe_i
+add wave -noupdate /blink_block_mem_tb/uut/dut03/mr_i
+add wave -noupdate /blink_block_mem_tb/uut/dut03/ms_i
+add wave -noupdate /blink_block_mem_tb/uut/dut03/nsl_s
+add wave -noupdate /blink_block_mem_tb/uut/dut03/op_sel_s
+add wave -noupdate /blink_block_mem_tb/uut/dut03/switch_s
+add wave -noupdate /blink_block_mem_tb/uut/dut03/alu_out_s
+add wave -noupdate /blink_block_mem_tb/uut/dut03/memory_out_s
+add wave -noupdate /blink_block_mem_tb/uut/dut03/state_next_s
+add wave -noupdate /blink_block_mem_tb/uut/dut03/state_pres_s
+
 add wave -noupdate -radix States /blink_block_mem_tb/bcd_hun_o
 add wave -noupdate -radix States /blink_block_mem_tb/bcd_ten_o
 add wave -noupdate -radix States /blink_block_mem_tb/bcd_one_o
+
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {50000 ps} 0}
