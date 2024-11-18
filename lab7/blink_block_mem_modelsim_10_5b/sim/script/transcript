@@ -1,0 +1,147 @@
+# do sim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 13:45:51 on Nov 18,2024
+# vcom -reportprogress 300 -93 -work work ../../src/rom/blink_rom.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package altera_mf_components
+# -- Compiling entity blink_rom
+# -- Compiling architecture SYN of blink_rom
+# End time: 13:45:51 on Nov 18,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 13:45:51 on Nov 18,2024
+# vcom -reportprogress 300 -93 -work work ../../src/generic_counter.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity generic_counter
+# -- Compiling architecture beh of generic_counter
+# End time: 13:45:51 on Nov 18,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 13:45:52 on Nov 18,2024
+# vcom -reportprogress 300 -93 -work work ../../src/seven_seg.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity seven_seg
+# -- Compiling architecture beh of seven_seg
+# End time: 13:45:52 on Nov 18,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 13:45:52 on Nov 18,2024
+# vcom -reportprogress 300 -93 -work work ../../src/blink_block_mem.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity blink_block_mem
+# -- Compiling architecture beh of blink_block_mem
+# End time: 13:45:52 on Nov 18,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 13:45:52 on Nov 18,2024
+# vcom -reportprogress 300 -93 -work work ../src/blink_block_mem_tb.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity blink_block_mem_tb
+# -- Compiling architecture arch of blink_block_mem_tb
+# ** Warning: ../src/blink_block_mem_tb.vhd(25): (vcom-1207) An abstract literal and an identifier must have a separator between them.
+# End time: 13:45:52 on Nov 18,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# vsim -voptargs="+acc" blink_block_mem_tb 
+# Start time: 13:45:52 on Nov 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.blink_block_mem_tb(arch)
+# Loading ieee.numeric_std(body)
+# Loading work.blink_block_mem(beh)
+# Loading work.seven_seg(beh)
+# Loading altera_mf.altera_mf_components
+# Loading work.blink_rom(syn)
+# ** Fatal: (vsim-3348) Port length (12) does not match actual length (13) for port "/blink_block_mem_tb/uut/rom_inst/q".
+#    Time: 0 ps  Iteration: 0  Instance: /blink_block_mem_tb/uut/rom_inst File: ../../src/rom/blink_rom.vhd Line: 48
+# FATAL ERROR while loading design
+# Error loading design
+# Error: Error loading design
+#        Pausing macro execution
+# MACRO ./sim.do PAUSED at line 7
+do sim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 13:50:02 on Nov 18,2024
+# vcom -reportprogress 300 -93 -work work ../../src/rom/blink_rom.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package altera_mf_components
+# -- Compiling entity blink_rom
+# -- Compiling architecture SYN of blink_rom
+# End time: 13:50:02 on Nov 18,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 13:50:02 on Nov 18,2024
+# vcom -reportprogress 300 -93 -work work ../../src/generic_counter.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity generic_counter
+# -- Compiling architecture beh of generic_counter
+# End time: 13:50:03 on Nov 18,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 13:50:03 on Nov 18,2024
+# vcom -reportprogress 300 -93 -work work ../../src/seven_seg.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity seven_seg
+# -- Compiling architecture beh of seven_seg
+# End time: 13:50:03 on Nov 18,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 13:50:03 on Nov 18,2024
+# vcom -reportprogress 300 -93 -work work ../../src/blink_block_mem.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity blink_block_mem
+# -- Compiling architecture beh of blink_block_mem
+# End time: 13:50:03 on Nov 18,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 13:50:03 on Nov 18,2024
+# vcom -reportprogress 300 -93 -work work ../src/blink_block_mem_tb.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity blink_block_mem_tb
+# -- Compiling architecture arch of blink_block_mem_tb
+# ** Warning: ../src/blink_block_mem_tb.vhd(25): (vcom-1207) An abstract literal and an identifier must have a separator between them.
+# End time: 13:50:03 on Nov 18,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# vsim -voptargs="+acc" blink_block_mem_tb 
+# Start time: 13:45:52 on Nov 18,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.blink_block_mem_tb(arch)
+# Loading ieee.numeric_std(body)
+# Loading work.blink_block_mem(beh)
+# Loading work.seven_seg(beh)
+# Loading altera_mf.altera_mf_components
+# Loading work.blink_rom(syn)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading altera_mf.altera_common_conversion(body)
+# Loading altera_mf.altera_device_families(body)
+# Loading altera_mf.altsyncram(translated)
+# Loading work.generic_counter(beh)
+# End time: 13:56:19 on Nov 18,2024, Elapsed time: 0:10:27
+# Errors: 1, Warnings: 0
