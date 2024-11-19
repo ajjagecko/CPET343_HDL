@@ -28,6 +28,7 @@ add wave -noupdate /blink_block_mem_tb/led_o
 
 add wave -noupdate /blink_block_mem_tb/pc_o
 add wave -noupdate /blink_block_mem_tb/instruct_set_o
+add wave -noupdate /blink_block_mem_tb/uut/exe_btn_s
 add wave -noupdate /blink_block_mem_tb/uut/dut03/exe_i
 add wave -noupdate /blink_block_mem_tb/uut/dut03/mr_i
 add wave -noupdate /blink_block_mem_tb/uut/dut03/ms_i

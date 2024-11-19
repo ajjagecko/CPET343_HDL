@@ -58,10 +58,13 @@ signal exe_btn_s : std_logic;
 signal reset_s : std_logic;
 
 signal pc_s      : std_logic_vector(4 downto 0) := "00000";
+signal pc_count_s      : std_logic_vector(4 downto 0) := "00000";
 signal next_pc_s      : std_logic_vector(4 downto 0);
 
 -- Instruction set and mapping aliases
+signal instruct_set_orig_s : std_logic_vector(12 downto 0);
 signal instruct_set_s : std_logic_vector(12 downto 0);
+signal flag :integer := 0;
 alias exe_a    : std_logic                    is instruct_set_s(12);
 alias opcode_a : std_logic_vector(1 downto 0) is instruct_set_s(11 downto 10);
 alias mr_a     : std_logic                    is instruct_set_s(9);
@@ -108,11 +111,20 @@ begin
       );
       
    -- Logic for determining PC
-   dut01 : process(exe_btn_s, pc_s)
+   dut01 : process(exe_btn_s, pc_s, clk)
       begin
          pc_s <= pc_s;
-         if exe_btn_s = '1' then
-            pc_s <= next_pc_s;
+         if (clk'event and clk = '1') then 
+            if exe_btn_s = '1' then
+               pc_s <= next_pc_s;
+               pc_count_s <= next_pc_s;
+               flag <= 1;
+            elsif flag < 4 then
+               flag <= flag + 1;
+            else
+               pc_s <= "00000";
+               flag <= 0;
+            end if;
          end if;
       end process;
    
@@ -121,7 +133,7 @@ begin
          bits => 5
       )
       port map (
-         a     => pc_s,
+         a     => pc_count_s,
          b     => "00001",
          cin   => '0',
          sum   => next_pc_s,
