@@ -60,7 +60,6 @@ signal pc_count_s      : std_logic_vector(4 downto 0) := "00000";
 signal next_pc_s      : std_logic_vector(4 downto 0);
 
 -- Instruction set and mapping aliases
-signal instruct_set_orig_s : std_logic_vector(12 downto 0);
 signal instruct_set_s : std_logic_vector(12 downto 0);
 signal flag :integer := 0;
 alias exe_a    : std_logic                    is instruct_set_s(12);
@@ -107,7 +106,7 @@ begin
       );
       
    -- Logic for determining PC
-   dut01 : process(exe_btn_s, pc_s, clk)
+   dut01 : process(exe_btn_s, pc_s, clk, flag, pc_count_s, reset_s)
       begin
          pc_s <= pc_s;
          if (reset_s = '1') then
