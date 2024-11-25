@@ -45,8 +45,6 @@ entity simple_processor is
       bcd_hun_o   :out std_logic_vector(6 downto 0);
       bcd_ten_o   :out std_logic_vector(6 downto 0);
       bcd_one_o   :out std_logic_vector(6 downto 0);
-      pc_o      :out std_logic_vector(4 downto 0);
-      instruct_set_o :out std_logic_vector(12 downto 0);
       led_o       :out std_logic_vector(3 downto 0)
    );
 end simple_processor;
@@ -98,8 +96,6 @@ end component;
 
 begin
    reset_s <= reset;
-   pc_o <= pc_s;
-   instruct_set_o <= instruct_set_s;
    
    -- RES for Execute Button
    dut00: rising_edge_synchronizer
