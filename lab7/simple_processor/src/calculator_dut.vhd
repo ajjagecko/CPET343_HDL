@@ -222,8 +222,8 @@ begin
          case state_next_s is
             when reset_state =>
                   addr_s <= WORK_ADDR;
-                  write_en_s <= '0';
-                  memory_in_s <= memory_in_s;
+                  write_en_s <= '1';
+                  memory_in_s <= "00000000";
             when mr_state =>
                if(state_next_s /= state_pres_s) then   -- Checking for if it just entered state
                   addr_s <= SAVE_ADDR;

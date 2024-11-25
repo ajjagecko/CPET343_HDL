@@ -23,7 +23,7 @@ component simple_processor is
 end component; 
                                         
 signal clk            : std_logic := '0';
-signal reset          : std_logic := '1';
+signal reset          : std_logic := '0';
 constant period   : time := 10ns;
 signal exe_btn_i      : std_logic := '0';
 signal led_o      : std_logic_vector(3 downto 0) := "0000";
@@ -44,7 +44,7 @@ end process;
 async_reset: process
   begin
     wait for 2 * period;
-    reset <= '0';
+    reset <= '1';
     wait;
 end process; 
 

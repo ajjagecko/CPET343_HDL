@@ -95,7 +95,7 @@ component blink_rom
 end component;
 
 begin
-   reset_s <= reset;
+   reset_s <= not reset;
    
    -- RES for Execute Button
    dut00: rising_edge_synchronizer
@@ -110,7 +110,10 @@ begin
    dut01 : process(exe_btn_s, pc_s, clk)
       begin
          pc_s <= pc_s;
-         if (clk'event and clk = '1') then 
+         if (reset_s = '1') then
+            pc_s <= "00000";
+            pc_count_s <= "00000";
+         elsif (clk'event and clk = '1') then 
             if exe_btn_s = '1' then
                pc_s <= next_pc_s;
                pc_count_s <= next_pc_s;

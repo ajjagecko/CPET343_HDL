@@ -32,7 +32,7 @@ set_global_assignment -name VHDL_FILE ../../src/simple_processor.vhd
 
 set_location_assignment PIN_AF14 -to clk
 set_location_assignment PIN_AA14 -to reset
-set_location_assignment PIN_Y16  -to exe_i
+set_location_assignment PIN_Y16  -to exe_btn_i
 
 set_location_assignment PIN_V16  -to led_o[0]
 set_location_assignment PIN_W16  -to led_o[1]
