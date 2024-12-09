@@ -1,7 +1,12 @@
-vlib altera_mf
 vlib work
+
+vcom -93 -work work ../../../../../package/package_lib/cpet_343_components.vhd
+vcom -93 -work work ../../../../../package/package_lib/generic_adder_arch/generic_adder_arch.vhd
+vcom -93 -work work ../../../../../package/package_lib/generic_adder_arch/full_adder_single_bit_arch.vhd
+
 vcom -93 -work work ../../src/rom_data/rom_data.vhd
 vcom -93 -work work ../../src/rom_instructions/rom_instructions.vhd
+vcom -93 -work work ../../src/rising_edge_synchronizer.vhd
 vcom -93 -work work ../../src/rising_edge_synchronizer.vhd
 vcom -93 -work work ../../src/dj_roomba_3000.vhd
 vcom -93 -work work ../src/dj_roomba_3000_tb.vhd
