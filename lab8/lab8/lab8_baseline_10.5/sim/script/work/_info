@@ -1,0 +1,234 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline/sim/script
+Paltera_mf_components
+Z0 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z1 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+w1536825281
+Z2 dC:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/sim/script
+8C:/intelFPGA/18.1/modelsim_ase/altera/vhdl/src/altera_mf/altera_mf_components.vhd
+FC:/intelFPGA/18.1/modelsim_ase/altera/vhdl/src/altera_mf/altera_mf_components.vhd
+l0
+L22
+VLFa1TI6_kle?2V:6GnRQ;2
+!s100 Wl6QV`@:7FBd350QRj[e>3
+Z3 OV;C;10.5b;63
+31
+!s110 1733769637
+!i10b 1
+!s108 1733769637.000000
+!s90 -reportprogress|300|-93|-work|work|C:/intelFPGA/18.1/modelsim_ase/altera/vhdl/src/altera_mf/altera_mf_components.vhd|
+!s107 C:/intelFPGA/18.1/modelsim_ase/altera/vhdl/src/altera_mf/altera_mf_components.vhd|
+!i113 1
+Z4 o-93 -work work
+Z5 tExplicit 1 CvgOpt 0
+Edj_roomba_3000
+Z6 w1733767398
+Z7 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+R0
+R1
+R2
+Z8 8../../src/dj_roomba_3000.vhd
+Z9 F../../src/dj_roomba_3000.vhd
+l0
+L8
+Vk4=28P^]U2U^FI[`zG4[j1
+!s100 GM3[DB:gnT:9cflc5I]710
+R3
+31
+Z10 !s110 1733770557
+!i10b 1
+Z11 !s108 1733770557.000000
+Z12 !s90 -reportprogress|300|-93|-work|work|../../src/dj_roomba_3000.vhd|
+Z13 !s107 ../../src/dj_roomba_3000.vhd|
+!i113 1
+R4
+R5
+Abeh
+R7
+R0
+R1
+DEx4 work 14 dj_roomba_3000 0 22 k4=28P^]U2U^FI[`zG4[j1
+l40
+L19
+Vf3Z<me30gAG;^4dZ18VRU0
+!s100 zX=fFM2mF^ciJNXJeFhYX0
+R3
+31
+R10
+!i10b 1
+R11
+R12
+R13
+!i113 1
+R4
+R5
+Edj_roomba_3000_tb
+R6
+R7
+R0
+R1
+R2
+Z14 8../src/dj_roomba_3000_tb.vhd
+Z15 F../src/dj_roomba_3000_tb.vhd
+l0
+L9
+VonaNdhMMfJi3V>loPg@_]0
+!s100 A`=239<Y4BYFM?lMMLkQk2
+R3
+31
+Z16 !s110 1733770558
+!i10b 1
+Z17 !s108 1733770558.000000
+Z18 !s90 -reportprogress|300|-93|-work|work|../src/dj_roomba_3000_tb.vhd|
+Z19 !s107 ../src/dj_roomba_3000_tb.vhd|
+!i113 1
+R4
+R5
+Aarch
+R7
+R0
+R1
+Z20 DEx4 work 17 dj_roomba_3000_tb 0 22 onaNdhMMfJi3V>loPg@_]0
+l30
+L12
+Z21 VcRRTaA22QW8<FN:i[CTa43
+Z22 !s100 a@Q9<zjELgYJJ@>:TiRS13
+R3
+31
+R16
+!i10b 1
+R17
+R18
+R19
+!i113 1
+R4
+R5
+Erising_edge_synchronizer
+R6
+R0
+R1
+R2
+Z23 8../../src/rising_edge_synchronizer.vhd
+Z24 F../../src/rising_edge_synchronizer.vhd
+l0
+L8
+V7^gf[0AcMz;oFDKIj=b3N3
+!s100 8>=9Tc6dAVdENebjXiG<30
+R3
+31
+R10
+!i10b 1
+R11
+Z25 !s90 -reportprogress|300|-93|-work|work|../../src/rising_edge_synchronizer.vhd|
+Z26 !s107 ../../src/rising_edge_synchronizer.vhd|
+!i113 1
+R4
+R5
+Abeh
+R0
+R1
+DEx4 work 24 rising_edge_synchronizer 0 22 7^gf[0AcMz;oFDKIj=b3N3
+l22
+L17
+VDiJNT@9ALH<beU@?[8WYF3
+!s100 bl0g6Z13_?2U69Fj`HUc[2
+R3
+31
+R10
+!i10b 1
+R11
+R25
+R26
+!i113 1
+R4
+R5
+Erom_data
+Z27 w1733768538
+Z28 DPx9 altera_mf 20 altera_mf_components 0 22 gV:l9C^?PSb6]b5V?_jR@3
+R0
+R1
+R2
+Z29 8../../src/rom_data/rom_data.vhd
+Z30 F../../src/rom_data/rom_data.vhd
+l0
+L43
+VRWR7CG@@f0P:aP`WJCG@S3
+!s100 3OF@?0zK=gZ@:TQ3ckXiW3
+R3
+31
+R10
+!i10b 1
+R11
+Z31 !s90 -reportprogress|300|-93|-work|work|../../src/rom_data/rom_data.vhd|
+Z32 !s107 ../../src/rom_data/rom_data.vhd|
+!i113 1
+R4
+R5
+Asyn
+R28
+R0
+R1
+DEx4 work 8 rom_data 0 22 RWR7CG@@f0P:aP`WJCG@S3
+l57
+L53
+V:ESo^F:]64NXSdAj73Fa;0
+!s100 9a9dVjij9XJOL2;M8ikPd2
+R3
+31
+R10
+!i10b 1
+R11
+R31
+R32
+!i113 1
+R4
+R5
+Erom_instructions
+Z33 w1733768572
+R28
+R0
+R1
+R2
+Z34 8../../src/rom_instructions/rom_instructions.vhd
+Z35 F../../src/rom_instructions/rom_instructions.vhd
+l0
+L43
+VPMW]WS51oI@HX@VPQ8:5i1
+!s100 :C`k>[oHGDXJmi4W__ZVn3
+R3
+31
+R10
+!i10b 1
+R11
+Z36 !s90 -reportprogress|300|-93|-work|work|../../src/rom_instructions/rom_instructions.vhd|
+Z37 !s107 ../../src/rom_instructions/rom_instructions.vhd|
+!i113 1
+R4
+R5
+Asyn
+R28
+R0
+R1
+DEx4 work 16 rom_instructions 0 22 PMW]WS51oI@HX@VPQ8:5i1
+l57
+L53
+VNW`a8TQBIY_iNg`:6J5gm0
+!s100 1X7BGeSHTVzFblU=C]iG>0
+R3
+31
+R10
+!i10b 1
+R11
+R36
+R37
+!i113 1
+R4
+R5
