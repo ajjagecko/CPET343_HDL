@@ -9,13 +9,16 @@ radix define States {
     -defaultcolor white
 }
 quietly WaveActivateNextPane {} 0
-add wave -noupdate /dj_roomba_3000_tb/dj_roomba/clk
-add wave -noupdate /dj_roomba_3000_tb/dj_roomba/reset
-add wave -noupdate /dj_roomba_3000_tb/dj_roomba/execute_btn
-add wave -noupdate /dj_roomba_3000_tb/dj_roomba/sync
-add wave -noupdate /dj_roomba_3000_tb/dj_roomba/led
-add wave -noupdate /dj_roomba_3000_tb/dj_roomba/audio_out
-add wave -noupdate /dj_roomba_3000_tb/dj_roomba/data_address
+add wave -noupdate /blink_block_mem_tb/dj_roomba/clk
+add wave -noupdate /blink_block_mem_tb/dj_roomba/reset
+add wave -noupdate /blink_block_mem_tb/dj_roomba/execute_btn
+add wave -noupdate /blink_block_mem_tb/dj_roomba/sync
+add wave -noupdate /blink_block_mem_tb/dj_roomba/led
+add wave -noupdate /blink_block_mem_tb/dj_roomba/audio_out
+add wave -noupdate /blink_block_mem_tb/dj_roomba/data_address
+add wave -noupdate /blink_block_mem_tb/dj_roomba/counter_sync
+add wave -noupdate /blink_block_mem_tb/dj_roomba/state_pres_s
+add wave -noupdate -radix States /blink_block_mem_tb/dj_roomba/instruction_s
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {2012 ns} 0}
 quietly wave cursor active 1

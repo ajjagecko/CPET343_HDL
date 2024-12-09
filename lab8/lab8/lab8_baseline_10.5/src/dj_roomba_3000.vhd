@@ -154,7 +154,7 @@ u_generic_count_inst : generic_counter
   );  
 
   -- loop audio file
-u_data_addr_logic: process(clk,reset)
+u_data_addr_logic: process(clk, reset, counter_sync, state_pres_s, data_address, next_data_address, seek_code, repeat_code)
   begin 
     if (reset = '1') then 
       data_address <= (others => '0');
