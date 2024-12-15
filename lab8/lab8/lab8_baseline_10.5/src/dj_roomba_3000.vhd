@@ -5,9 +5,6 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library work;
-use work.cpet_343_components.all;
-
 entity dj_roomba_3000 is 
   port(
     clk                 : in std_logic;
@@ -49,6 +46,15 @@ architecture beh of dj_roomba_3000 is
    );
   end component;
   
+  component rising_edge_synchronizer is
+      port (
+         clk               : in std_logic;
+         reset             : in std_logic;
+         input             : in std_logic;
+         edge              : out std_logic
+      );
+  end component;
+  
   component generic_counter is
     generic (
       max_count       : integer range 0 to 10000 := 3
@@ -71,6 +77,7 @@ signal execute_btn_s : std_logic;
 signal pc_s          : std_logic_vector (4 DOWNTO 0) := "00000";
 signal next_pc_s     : std_logic_vector (4 DOWNTO 0) := "00000";
 
+signal instruction_next_s : std_logic_vector(7 downto 0);
 signal instruction_s : std_logic_vector(7 downto 0);
 alias status_code    : std_logic_vector(1 downto 0) is instruction_s(7 downto 6);
 alias repeat_code    : std_logic                    is instruction_s(5);
@@ -107,8 +114,9 @@ u_rom_instruct_inst : rom_instructions
   port map(
     address    => pc_s,
     clock      => clk,
-    q          => instruction_s
+    q          => instruction_next_s
   );
+   
   
 u_state_machine_inst : state_machine_five_states
   port map(
@@ -134,18 +142,22 @@ u_pc_logic: process(pc_s, clk, reset, state_pres_s)
   
   next_pc_s <= std_logic_vector(unsigned(pc_s) + 1 );
     
-u_error_logic : process(clk, error_s, status_code, seek_code)
+u_error_logic : process(clk, error_s, state_pres_s, instruction_next_s)
    begin
-      if (status_code = "10") and (seek_code = "00000") then
-         error_s <= '1';
-      else
-         error_s <= '0';
+      if state_pres_s = decode_state_c then
+         if (instruction_next_s = "10000000" ) or (instruction_next_s = "10100000") then
+            error_s <= '1';
+            instruction_s <= instruction_s;
+         else
+            error_s <= '0';
+            instruction_s <= instruction_next_s;
+         end if;
       end if;
    end process;
     
 u_generic_count_inst : generic_counter
   generic map(
-    max_count => 5
+    max_count => 6
   )
   port map(
     clk        => clk,
@@ -154,43 +166,41 @@ u_generic_count_inst : generic_counter
   );  
 
   -- loop audio file
-u_data_addr_logic: process(clk, reset, counter_sync, state_pres_s, data_address, next_data_address, seek_code, repeat_code)
+u_data_addr_logic: process(clk, reset, counter_sync, status_code, data_address, next_data_address, seek_code, repeat_code)
   begin 
     if (reset = '1') then 
       data_address <= (others => '0');
     elsif (clk'event and clk = '1') then
       if counter_sync = '1' then
-         if state_pres_s = exec_state_c then
-            case status_code is
-               when "00" =>
-                  if (next_data_address = "00000000000000") then 
-                     if repeat_code = '1' then
-                        data_address <= "00000000000000";
-                     else
-                        data_address <= next_data_address;
-                     end if;
+         case status_code is
+            when "00" =>
+               if (next_data_address = "00000000000000") then 
+                  if repeat_code = '0' then
+                     data_address <= "00000000000000";
                   else
                      data_address <= next_data_address;
                   end if;
+               else
+                  data_address <= next_data_address;
+               end if;
             
-               when "01" =>
-                  data_address <= data_address;
+            when "01" =>
+               data_address <= data_address;
                
-               when "10" =>
-                  data_address <= seek_code & "000000000";
+            when "10" =>
+               data_address <= seek_code & "000000000";
                
-               when "11" =>
-                  data_address <= "00000000000000";
+            when "11" =>
+               data_address <= "00000000000000";
                
-               when others => 
-                  data_address <= data_address;
-            end case;
-         end if;
+            when others => 
+               data_address <= data_address;
+         end case;
       end if;
    end if;
-  end process;
+   next_data_address <= std_logic_vector(unsigned(data_address) + 1 );
+   end process;
   
-  next_data_address <= std_logic_vector(unsigned(data_address) + 1 );
   led <= instruction_s;
   
 end beh;
