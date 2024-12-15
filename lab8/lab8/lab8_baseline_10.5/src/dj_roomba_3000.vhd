@@ -176,7 +176,7 @@ u_data_addr_logic: process(clk, reset, counter_sync, status_code, data_address, 
             when "00" =>
                if (next_data_address = "00000000000000") then 
                   if repeat_code = '0' then
-                     data_address <= "00000000000000";
+                     data_address <= data_address;
                   else
                      data_address <= next_data_address;
                   end if;
