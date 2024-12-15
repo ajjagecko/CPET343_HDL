@@ -12,8 +12,8 @@ BEGIN
 2   : 11000000;   -- stop
 3   : 00100000;   -- play repeating
 4   : 01000000;   -- pause
-5   : 00000000;   -- play once
-6   : 10010000;   -- seek half way
+5   : 00100000;   -- play repeat
+6   : 10000000;   -- seek half way
 7   : 00000000;   -- play once
 8   : 11000000;   -- stop 
 9   : 00000000;   -- play once

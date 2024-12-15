@@ -1,5 +1,5 @@
 Timing Analyzer report for dj_roomba
-Sun Dec 15 14:47:15 2024
+Sun Dec 15 14:56:51 2024
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -102,26 +102,26 @@ https://fpgasoftware.intel.com/eula.
 ; Number detected on machine ; 16          ;
 ; Maximum allowed            ; 16          ;
 ;                            ;             ;
-; Average used               ; 1.74        ;
+; Average used               ; 1.72        ;
 ; Maximum used               ; 16          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   5.2%      ;
-;     Processor 3            ;   5.2%      ;
-;     Processor 4            ;   5.1%      ;
-;     Processor 5            ;   4.9%      ;
-;     Processor 6            ;   4.9%      ;
-;     Processor 7            ;   4.9%      ;
-;     Processor 8            ;   4.9%      ;
-;     Processor 9            ;   4.9%      ;
-;     Processor 10           ;   4.9%      ;
-;     Processor 11           ;   4.9%      ;
-;     Processor 12           ;   4.8%      ;
-;     Processor 13           ;   4.8%      ;
-;     Processor 14           ;   4.8%      ;
-;     Processor 15           ;   4.8%      ;
-;     Processor 16           ;   4.8%      ;
+;     Processor 2            ;   5.1%      ;
+;     Processor 3            ;   5.0%      ;
+;     Processor 4            ;   4.9%      ;
+;     Processor 5            ;   4.8%      ;
+;     Processor 6            ;   4.7%      ;
+;     Processor 7            ;   4.7%      ;
+;     Processor 8            ;   4.7%      ;
+;     Processor 9            ;   4.7%      ;
+;     Processor 10           ;   4.7%      ;
+;     Processor 11           ;   4.7%      ;
+;     Processor 12           ;   4.7%      ;
+;     Processor 13           ;   4.7%      ;
+;     Processor 14           ;   4.7%      ;
+;     Processor 15           ;   4.7%      ;
+;     Processor 16           ;   4.7%      ;
 +----------------------------+-------------+
 
 
@@ -668,7 +668,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
-    Info: Processing started: Sun Dec 15 14:47:07 2024
+    Info: Processing started: Sun Dec 15 14:56:43 2024
 Info: Command: quartus_sta dj_roomba -c dj_roomba
 Info: qsta_default_script.tcl version: #1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -803,8 +803,8 @@ Info (332146): Worst-case minimum pulse width slack is 15.036
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 19 warnings
-    Info: Peak virtual memory: 5385 megabytes
-    Info: Processing ended: Sun Dec 15 14:47:15 2024
+    Info: Peak virtual memory: 5373 megabytes
+    Info: Processing ended: Sun Dec 15 14:56:51 2024
     Info: Elapsed time: 00:00:08
     Info: Total CPU time (on all processors): 00:00:11
 
