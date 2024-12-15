@@ -2435,6 +2435,13 @@ clk => count_sig[2].CLK
 clk => count_sig[3].CLK
 clk => count_sig[4].CLK
 clk => count_sig[5].CLK
+clk => count_sig[6].CLK
+clk => count_sig[7].CLK
+clk => count_sig[8].CLK
+clk => count_sig[9].CLK
+clk => count_sig[10].CLK
+clk => count_sig[11].CLK
+clk => count_sig[12].CLK
 reset => output~reg0.ACLR
 reset => count_sig[0].ACLR
 reset => count_sig[1].ACLR
@@ -2442,6 +2449,13 @@ reset => count_sig[2].ACLR
 reset => count_sig[3].ACLR
 reset => count_sig[4].ACLR
 reset => count_sig[5].ACLR
+reset => count_sig[6].ACLR
+reset => count_sig[7].ACLR
+reset => count_sig[8].ACLR
+reset => count_sig[9].ACLR
+reset => count_sig[10].ACLR
+reset => count_sig[11].ACLR
+reset => count_sig[12].ACLR
 output <= output~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 

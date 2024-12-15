@@ -157,7 +157,7 @@ u_error_logic : process(clk, error_s, state_pres_s, instruction_next_s)
     
 u_generic_count_inst : generic_counter
   generic map(
-    max_count => 6
+    max_count => 6104
   )
   port map(
     clk        => clk,
