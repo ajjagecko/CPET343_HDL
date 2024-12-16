@@ -1,5 +1,5 @@
 Analysis & Synthesis report for dj_roomba
-Sun Dec 15 14:54:56 2024
+Mon Dec 16 14:57:21 2024
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -90,13 +90,13 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Sun Dec 15 14:54:56 2024          ;
+; Analysis & Synthesis Status     ; Successful - Mon Dec 16 14:57:21 2024          ;
 ; Quartus Prime Version           ; 23.1std.1 Build 993 05/14/2024 SC Lite Edition ;
 ; Revision Name                   ; dj_roomba                                      ;
 ; Top-level Entity Name           ; top                                            ;
 ; Family                          ; Cyclone V                                      ;
 ; Logic utilization (in ALMs)     ; N/A                                            ;
-; Total registers                 ; 461                                            ;
+; Total registers                 ; 466                                            ;
 ; Total pins                      ; 22                                             ;
 ; Total virtual pins              ; 0                                              ;
 ; Total block memory bits         ; 268,544                                        ;
@@ -300,16 +300,16 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+----------------+
 ; Resource                                    ; Usage          ;
 +---------------------------------------------+----------------+
-; Estimate of Logic utilization (ALMs needed) ; 398            ;
+; Estimate of Logic utilization (ALMs needed) ; 399            ;
 ;                                             ;                ;
 ; Combinational ALUT usage for logic          ; 616            ;
 ;     -- 7 input functions                    ; 11             ;
-;     -- 6 input functions                    ; 120            ;
-;     -- 5 input functions                    ; 154            ;
-;     -- 4 input functions                    ; 71             ;
-;     -- <=3 input functions                  ; 260            ;
+;     -- 6 input functions                    ; 122            ;
+;     -- 5 input functions                    ; 156            ;
+;     -- 4 input functions                    ; 79             ;
+;     -- <=3 input functions                  ; 248            ;
 ;                                             ;                ;
-; Dedicated logic registers                   ; 461            ;
+; Dedicated logic registers                   ; 466            ;
 ;                                             ;                ;
 ; I/O pins                                    ; 22             ;
 ; Total MLAB memory bits                      ; 0              ;
@@ -321,9 +321,9 @@ https://fpgasoftware.intel.com/eula.
 ;     -- PLLs                                 ; 1              ;
 ;                                             ;                ;
 ; Maximum fan-out node                        ; CLOCK_50~input ;
-; Maximum fan-out                             ; 352            ;
-; Total fan-out                               ; 6112           ;
-; Average fan-out                             ; 5.01           ;
+; Maximum fan-out                             ; 357            ;
+; Total fan-out                               ; 6149           ;
+; Average fan-out                             ; 5.02           ;
 +---------------------------------------------+----------------+
 
 
@@ -332,7 +332,7 @@ https://fpgasoftware.intel.com/eula.
 +-----------------------------------------------------------------------------------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+--------------+
 ; Compilation Hierarchy Node                                                                                                              ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                                                                                                                                                                                             ; Entity Name                       ; Library Name ;
 +-----------------------------------------------------------------------------------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+--------------+
-; |top                                                                                                                                    ; 616 (2)             ; 461 (0)                   ; 268544            ; 0          ; 22   ; 0            ; |top                                                                                                                                                                                                                                                                                                                                            ; top                               ; work         ;
+; |top                                                                                                                                    ; 616 (2)             ; 466 (0)                   ; 268544            ; 0          ; 22   ; 0            ; |top                                                                                                                                                                                                                                                                                                                                            ; top                               ; work         ;
 ;    |audio_and_video_config:cfg|                                                                                                         ; 102 (2)             ; 65 (9)                    ; 0                 ; 0          ; 0    ; 0            ; |top|audio_and_video_config:cfg                                                                                                                                                                                                                                                                                                                 ; audio_and_video_config            ; work         ;
 ;       |Altera_UP_I2C:I2C_Controller|                                                                                                    ; 19 (19)             ; 18 (18)                   ; 0                 ; 0          ; 0    ; 0            ; |top|audio_and_video_config:cfg|Altera_UP_I2C:I2C_Controller                                                                                                                                                                                                                                                                                    ; Altera_UP_I2C                     ; work         ;
 ;       |Altera_UP_I2C_AV_Auto_Initialize:Auto_Initialize|                                                                                ; 66 (66)             ; 25 (25)                   ; 0                 ; 0          ; 0    ; 0            ; |top|audio_and_video_config:cfg|Altera_UP_I2C_AV_Auto_Initialize:Auto_Initialize                                                                                                                                                                                                                                                                ; Altera_UP_I2C_AV_Auto_Initialize  ; work         ;
@@ -374,7 +374,7 @@ https://fpgasoftware.intel.com/eula.
 ;    |clock_generator:my_clock_gen|                                                                                                       ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top|clock_generator:my_clock_gen                                                                                                                                                                                                                                                                                                               ; clock_generator                   ; work         ;
 ;       |altpll:DE_Clock_Generator_Audio|                                                                                                 ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top|clock_generator:my_clock_gen|altpll:DE_Clock_Generator_Audio                                                                                                                                                                                                                                                                               ; altpll                            ; work         ;
 ;          |altpll_1uu1:auto_generated|                                                                                                   ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top|clock_generator:my_clock_gen|altpll:DE_Clock_Generator_Audio|altpll_1uu1:auto_generated                                                                                                                                                                                                                                                    ; altpll_1uu1                       ; work         ;
-;    |dj_roomba_3000:dj_roomba|                                                                                                           ; 210 (72)            ; 128 (19)                  ; 262400            ; 0          ; 0    ; 0            ; |top|dj_roomba_3000:dj_roomba                                                                                                                                                                                                                                                                                                                   ; dj_roomba_3000                    ; work         ;
+;    |dj_roomba_3000:dj_roomba|                                                                                                           ; 210 (72)            ; 133 (24)                  ; 262400            ; 0          ; 0    ; 0            ; |top|dj_roomba_3000:dj_roomba                                                                                                                                                                                                                                                                                                                   ; dj_roomba_3000                    ; work         ;
 ;       |generic_counter:u_generic_count_inst|                                                                                            ; 16 (16)             ; 14 (14)                   ; 0                 ; 0          ; 0    ; 0            ; |top|dj_roomba_3000:dj_roomba|generic_counter:u_generic_count_inst                                                                                                                                                                                                                                                                              ; generic_counter                   ; work         ;
 ;       |rising_edge_synchronizer:dut00|                                                                                                  ; 1 (1)               ; 3 (3)                     ; 0                 ; 0          ; 0    ; 0            ; |top|dj_roomba_3000:dj_roomba|rising_edge_synchronizer:dut00                                                                                                                                                                                                                                                                                    ; rising_edge_synchronizer          ; work         ;
 ;       |rom_data:u_rom_data_inst|                                                                                                        ; 79 (0)              ; 55 (0)                    ; 262144            ; 0          ; 0    ; 0            ; |top|dj_roomba_3000:dj_roomba|rom_data:u_rom_data_inst                                                                                                                                                                                                                                                                                          ; rom_data                          ; work         ;
@@ -477,7 +477,7 @@ Encoding Type:  One-Hot
 ; dj_roomba_3000:dj_roomba|instruction_s[5]          ; dj_roomba_3000:dj_roomba|instruction_s[7] ; yes                    ;
 ; dj_roomba_3000:dj_roomba|instruction_s[6]          ; dj_roomba_3000:dj_roomba|instruction_s[7] ; yes                    ;
 ; dj_roomba_3000:dj_roomba|instruction_s[7]          ; dj_roomba_3000:dj_roomba|instruction_s[7] ; yes                    ;
-; dj_roomba_3000:dj_roomba|error_s                   ; dj_roomba_3000:dj_roomba|Equal1           ; yes                    ;
+; dj_roomba_3000:dj_roomba|error_s                   ; dj_roomba_3000:dj_roomba|error_s          ; yes                    ;
 ; Number of user-specified and inferred latches = 9  ;                                           ;                        ;
 +----------------------------------------------------+-------------------------------------------+------------------------+
 Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
@@ -528,12 +528,12 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 461   ;
+; Total registers                              ; 466   ;
 ; Number of registers using Synchronous Clear  ; 201   ;
 ; Number of registers using Synchronous Load   ; 62    ;
-; Number of registers using Asynchronous Clear ; 142   ;
+; Number of registers using Asynchronous Clear ; 147   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 292   ;
+; Number of registers using Clock Enable       ; 299   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -543,10 +543,11 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
 ; Inverted Register                                                                                                                                                                                                                                                                                                               ; Fan out ;
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
-; dj_roomba_3000:dj_roomba|state_machine_five_states:u_state_machine_inst|state_pres_s[0]                                                                                                                                                                                                                                         ; 6       ;
+; dj_roomba_3000:dj_roomba|state_machine_five_states:u_state_machine_inst|state_pres_s[0]                                                                                                                                                                                                                                         ; 8       ;
+; dj_roomba_3000:dj_roomba|next_pc_s[0]                                                                                                                                                                                                                                                                                           ; 6       ;
 ; sld_hub:auto_hub|alt_sld_fab_with_jtag_input:\instrumentation_fabric_with_node_gen:fabric_gen_new_way:with_jtag_input_gen:instrumentation_fabric|alt_sld_fab:instrumentation_fabric|alt_sld_fab_alt_sld_fab:alt_sld_fab|alt_sld_fab_alt_sld_fab_sldfabric:sldfabric|sld_jtag_hub:\jtag_hub_gen:real_sld_jtag_hub|jtag_ir_reg[1] ; 3       ;
 ; sld_hub:auto_hub|alt_sld_fab_with_jtag_input:\instrumentation_fabric_with_node_gen:fabric_gen_new_way:with_jtag_input_gen:instrumentation_fabric|alt_sld_fab:instrumentation_fabric|alt_sld_fab_alt_sld_fab:alt_sld_fab|alt_sld_fab_alt_sld_fab_sldfabric:sldfabric|sld_jtag_hub:\jtag_hub_gen:real_sld_jtag_hub|jtag_ir_reg[2] ; 3       ;
-; Total number of inverted registers = 3                                                                                                                                                                                                                                                                                          ;         ;
+; Total number of inverted registers = 4                                                                                                                                                                                                                                                                                          ;         ;
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
 
 
@@ -1591,12 +1592,12 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 349                         ;
-;     CLR               ; 24                          ;
+; arriav_ff             ; 354                         ;
+;     CLR               ; 22                          ;
 ;     CLR SCLR          ; 13                          ;
 ;     CLR SLD           ; 1                           ;
 ;     ENA               ; 46                          ;
-;     ENA CLR           ; 22                          ;
+;     ENA CLR           ; 29                          ;
 ;     ENA CLR SCLR      ; 9                           ;
 ;     ENA CLR SLD       ; 14                          ;
 ;     ENA SCLR          ; 110                         ;
@@ -1612,18 +1613,18 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;         7 data inputs ; 9                           ;
 ;     normal            ; 375                         ;
 ;         0 data inputs ; 1                           ;
-;         1 data inputs ; 1                           ;
-;         2 data inputs ; 32                          ;
-;         3 data inputs ; 60                          ;
-;         4 data inputs ; 59                          ;
-;         5 data inputs ; 124                         ;
-;         6 data inputs ; 98                          ;
+;         1 data inputs ; 3                           ;
+;         2 data inputs ; 31                          ;
+;         3 data inputs ; 47                          ;
+;         4 data inputs ; 67                          ;
+;         5 data inputs ; 126                         ;
+;         6 data inputs ; 100                         ;
 ; boundary_port         ; 76                          ;
 ; generic_pll           ; 1                           ;
 ; stratixv_ram_block    ; 88                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 5.30                        ;
-; Average LUT depth     ; 2.02                        ;
+; Average LUT depth     ; 2.00                        ;
 +-----------------------+-----------------------------+
 
 
@@ -1673,7 +1674,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
-    Info: Processing started: Sun Dec 15 14:54:33 2024
+    Info: Processing started: Mon Dec 16 14:56:57 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off dj_roomba -c dj_roomba
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
@@ -1730,9 +1731,11 @@ Warning (10036): Verilog HDL or VHDL warning at top.vhd(89): object "writedata_r
 Info (12128): Elaborating entity "generic_counter" for hierarchy "generic_counter:uut" File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/top.vhd Line: 109
 Info (12128): Elaborating entity "dj_roomba_3000" for hierarchy "dj_roomba_3000:dj_roomba" File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/top.vhd Line: 119
 Warning (10036): Verilog HDL or VHDL warning at dj_roomba_3000.vhd(92): object "state_next_s" assigned a value but never read File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 92
-Warning (10492): VHDL Process Statement warning at dj_roomba_3000.vhd(150): signal "instruction_s" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 150
-Warning (10631): VHDL Process Statement warning at dj_roomba_3000.vhd(145): inferring latch(es) for signal or variable "error_s", which holds its previous value in one or more paths through the process File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 145
+Warning (10492): VHDL Process Statement warning at dj_roomba_3000.vhd(147): signal "reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 147
+Warning (10492): VHDL Process Statement warning at dj_roomba_3000.vhd(152): signal "instruction_s" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 152
 Warning (10631): VHDL Process Statement warning at dj_roomba_3000.vhd(145): inferring latch(es) for signal or variable "instruction_s", which holds its previous value in one or more paths through the process File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 145
+Warning (10631): VHDL Process Statement warning at dj_roomba_3000.vhd(145): inferring latch(es) for signal or variable "error_s", which holds its previous value in one or more paths through the process File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 145
+Info (10041): Inferred latch for "error_s" at dj_roomba_3000.vhd(145) File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 145
 Info (10041): Inferred latch for "instruction_s[0]" at dj_roomba_3000.vhd(145) File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 145
 Info (10041): Inferred latch for "instruction_s[1]" at dj_roomba_3000.vhd(145) File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 145
 Info (10041): Inferred latch for "instruction_s[2]" at dj_roomba_3000.vhd(145) File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 145
@@ -1741,7 +1744,6 @@ Info (10041): Inferred latch for "instruction_s[4]" at dj_roomba_3000.vhd(145) F
 Info (10041): Inferred latch for "instruction_s[5]" at dj_roomba_3000.vhd(145) File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 145
 Info (10041): Inferred latch for "instruction_s[6]" at dj_roomba_3000.vhd(145) File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 145
 Info (10041): Inferred latch for "instruction_s[7]" at dj_roomba_3000.vhd(145) File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 145
-Info (10041): Inferred latch for "error_s" at dj_roomba_3000.vhd(145) File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 145
 Info (12128): Elaborating entity "rising_edge_synchronizer" for hierarchy "dj_roomba_3000:dj_roomba|rising_edge_synchronizer:dut00" File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 97
 Info (12128): Elaborating entity "rom_data" for hierarchy "dj_roomba_3000:dj_roomba|rom_data:u_rom_data_inst" File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 106
 Info (12128): Elaborating entity "altsyncram" for hierarchy "dj_roomba_3000:dj_roomba|rom_data:u_rom_data_inst|altsyncram:altsyncram_component" File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/rom_data/rom_data.vhd Line: 60
@@ -1903,7 +1905,7 @@ Info (12133): Instantiated megafunction "dj_roomba_3000:dj_roomba|rom_instructio
     Info (12134): Parameter "WIDTHAD" = "5"
 Info (12128): Elaborating entity "state_machine_five_states" for hierarchy "dj_roomba_3000:dj_roomba|state_machine_five_states:u_state_machine_inst" File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 121
 Warning (10492): VHDL Process Statement warning at state_machine_five_states.vhd(39): signal "state_pres_s" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/state_machine_five_states.vhd Line: 39
-Info (12128): Elaborating entity "generic_counter" for hierarchy "dj_roomba_3000:dj_roomba|generic_counter:u_generic_count_inst" File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 158
+Info (12128): Elaborating entity "generic_counter" for hierarchy "dj_roomba_3000:dj_roomba|generic_counter:u_generic_count_inst" File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 160
 Info (12128): Elaborating entity "clock_generator" for hierarchy "clock_generator:my_clock_gen" File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/top.vhd Line: 129
 Info (12128): Elaborating entity "altpll" for hierarchy "clock_generator:my_clock_gen|altpll:DE_Clock_Generator_Audio" File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/audio_ip/clock_generator.v Line: 134
 Info (12130): Elaborated megafunction instantiation "clock_generator:my_clock_gen|altpll:DE_Clock_Generator_Audio" File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/audio_ip/clock_generator.v Line: 134
@@ -2014,7 +2016,7 @@ Info (12128): Elaborating entity "cntr_i2b" for hierarchy "audio_codec:codec|Alt
 Info (12128): Elaborating entity "Altera_UP_Audio_Out_Serializer" for hierarchy "audio_codec:codec|Altera_UP_Audio_Out_Serializer:Audio_Out_Serializer" File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/audio_ip/audio_codec.v Line: 267
 Warning (12030): Port "clk" on the entity instantiation of "DE_Clock_Generator_Audio" is connected to a signal of width 1. The formal width of the signal in the module is 6.  The extra bits will be left dangling without any fan-out logic. File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/audio_ip/clock_generator.v Line: 134
 Info (11170): Starting IP generation for the debug fabric: alt_sld_fab.
-Info (11172): 2024.12.15.14:54:47 Progress: Loading sld0ef9f1e8/alt_sld_fab_wrapper_hw.tcl
+Info (11172): 2024.12.16.14:57:12 Progress: Loading sld0ef9f1e8/alt_sld_fab_wrapper_hw.tcl
 Info (11172): Alt_sld_fab.alt_sld_fab: SLD fabric agents which did not specify prefer_host were connected to JTAG
 Info (11172): Alt_sld_fab: Generating alt_sld_fab "alt_sld_fab" for QUARTUS_SYNTH
 Info (11172): Alt_sld_fab: "alt_sld_fab" instantiated alt_sld_fab "alt_sld_fab"
@@ -2110,6 +2112,7 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "LEDR[9]" is stuck at GND File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/top.vhd Line: 18
 Info (286031): Timing-Driven Synthesis is running on partition "Top"
 Critical Warning (18061): Ignored Power-Up Level option on the following registers
+    Critical Warning (18010): Register dj_roomba_3000:dj_roomba|next_pc_s[0] will power up to High File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/dj_roomba_3000.vhd Line: 134
     Critical Warning (18010): Register dj_roomba_3000:dj_roomba|rising_edge_synchronizer:dut00|input_z will power up to Low File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/rising_edge_synchronizer.vhd Line: 19
     Critical Warning (18010): Register dj_roomba_3000:dj_roomba|rising_edge_synchronizer:dut00|input_zz will power up to Low File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/rising_edge_synchronizer.vhd Line: 20
 Info (17049): 78 registers lost all their fanouts during netlist optimizations.
@@ -2118,17 +2121,17 @@ Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 16 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 1 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "AUD_ADCDAT" File: C:/Users/yroox/Desktop/RIT/CPET 343 HDL/lab8/lab8/lab8_baseline_10.5/src/top.vhd Line: 12
-Info (21057): Implemented 848 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 852 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 11 input pins
     Info (21059): Implemented 14 output pins
     Info (21060): Implemented 1 bidirectional pins
-    Info (21061): Implemented 732 logic cells
+    Info (21061): Implemented 736 logic cells
     Info (21064): Implemented 88 RAM segments
     Info (21065): Implemented 1 PLLs
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 87 warnings
-    Info: Peak virtual memory: 4997 megabytes
-    Info: Processing ended: Sun Dec 15 14:54:56 2024
-    Info: Elapsed time: 00:00:23
-    Info: Total CPU time (on all processors): 00:00:48
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 89 warnings
+    Info: Peak virtual memory: 4989 megabytes
+    Info: Processing ended: Mon Dec 16 14:57:21 2024
+    Info: Elapsed time: 00:00:24
+    Info: Total CPU time (on all processors): 00:00:49
 
 

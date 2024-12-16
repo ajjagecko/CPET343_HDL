@@ -1,5 +1,5 @@
 Flow report for dj_roomba
-Sun Dec 15 14:56:51 2024
+Mon Dec 16 14:59:10 2024
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -41,7 +41,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +---------------------------------+------------------------------------------------+
-; Flow Status                     ; Successful - Sun Dec 15 14:56:42 2024          ;
+; Flow Status                     ; Successful - Mon Dec 16 14:59:01 2024          ;
 ; Quartus Prime Version           ; 23.1std.1 Build 993 05/14/2024 SC Lite Edition ;
 ; Revision Name                   ; dj_roomba                                      ;
 ; Top-level Entity Name           ; top                                            ;
@@ -49,7 +49,7 @@ https://fpgasoftware.intel.com/eula.
 ; Device                          ; 5CSEMA5F31C6                                   ;
 ; Timing Models                   ; Final                                          ;
 ; Logic utilization (in ALMs)     ; 389 / 32,070 ( 1 % )                           ;
-; Total registers                 ; 475                                            ;
+; Total registers                 ; 476                                            ;
 ; Total pins                      ; 22 / 457 ( 5 % )                               ;
 ; Total virtual pins              ; 0                                              ;
 ; Total block memory bits         ; 268,544 / 4,065,280 ( 7 % )                    ;
@@ -68,7 +68,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 12/15/2024 14:54:33 ;
+; Start date & time ; 12/16/2024 14:56:58 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; dj_roomba           ;
 +-------------------+---------------------+
@@ -79,7 +79,7 @@ https://fpgasoftware.intel.com/eula.
 +--------------------------+------------------------------------------------------+---------------+-------------+------------+
 ; Assignment Name          ; Value                                                ; Default Value ; Entity Name ; Section Id ;
 +--------------------------+------------------------------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID    ; 82359658025259.173429247356404                       ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID    ; 82359658025259.173437901808416                       ; --            ; --          ; --         ;
 ; MISC_FILE                ; ../../src/rom_data/rom_data_inst.vhd                 ; --            ; --          ; --         ;
 ; MISC_FILE                ; ../../src/rom_data/rom_data.cmp                      ; --            ; --          ; --         ;
 ; MISC_FILE                ; ../../src/rom_data/rom_data_syn.v                    ; --            ; --          ; --         ;
@@ -96,11 +96,11 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:22     ; 1.0                     ; 4997 MB             ; 00:00:47                           ;
-; Fitter               ; 00:01:38     ; 1.1                     ; 7879 MB             ; 00:08:34                           ;
-; Assembler            ; 00:00:06     ; 1.0                     ; 4874 MB             ; 00:00:06                           ;
-; Timing Analyzer      ; 00:00:08     ; 1.7                     ; 5373 MB             ; 00:00:11                           ;
-; Total                ; 00:02:14     ; --                      ; --                  ; 00:09:38                           ;
+; Analysis & Synthesis ; 00:00:23     ; 1.0                     ; 4989 MB             ; 00:00:48                           ;
+; Fitter               ; 00:01:32     ; 1.1                     ; 7895 MB             ; 00:08:12                           ;
+; Assembler            ; 00:00:05     ; 1.0                     ; 4878 MB             ; 00:00:05                           ;
+; Timing Analyzer      ; 00:00:08     ; 1.7                     ; 5385 MB             ; 00:00:11                           ;
+; Total                ; 00:02:08     ; --                      ; --                  ; 00:09:16                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

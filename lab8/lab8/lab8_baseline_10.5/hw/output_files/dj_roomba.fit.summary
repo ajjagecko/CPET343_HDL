@@ -1,4 +1,4 @@
-Fitter Status : Successful - Sun Dec 15 14:56:35 2024
+Fitter Status : Successful - Mon Dec 16 14:58:54 2024
 Quartus Prime Version : 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 Revision Name : dj_roomba
 Top-level Entity Name : top
@@ -6,7 +6,7 @@ Family : Cyclone V
 Device : 5CSEMA5F31C6
 Timing Models : Final
 Logic utilization (in ALMs) : 389 / 32,070 ( 1 % )
-Total registers : 475
+Total registers : 476
 Total pins : 22 / 457 ( 5 % )
 Total virtual pins : 0
 Total block memory bits : 268,544 / 4,065,280 ( 7 % )

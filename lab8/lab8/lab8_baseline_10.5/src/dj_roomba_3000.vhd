@@ -133,18 +133,20 @@ u_pc_logic: process(pc_s, clk, reset, state_pres_s)
      pc_s <= pc_s;
      if (reset = '1') then
         pc_s <= "00000";
+        next_pc_s <= "00001";
      elsif (clk'event and clk = '1') then 
         if state_pres_s = fetch_state_c then
           pc_s <= next_pc_s;
+          next_pc_s <= std_logic_vector(unsigned(next_pc_s) + 1 );
         end if;
      end if;
   end process;
-  
-  next_pc_s <= std_logic_vector(unsigned(pc_s) + 1 );
     
 u_error_logic : process(clk, error_s, state_pres_s, instruction_next_s)
    begin
-      if state_pres_s = decode_state_c then
+      if reset = '1' then
+         instruction_s <= "11000000";
+      elsif state_pres_s = decode_state_c then
          if (instruction_next_s = "10000000" ) or (instruction_next_s = "10100000") then
             error_s <= '1';
             instruction_s <= instruction_s;
